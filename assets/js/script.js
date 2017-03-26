@@ -2,16 +2,18 @@ $(document).ready(function () {
   var myFish
   var mouseX = 0
   var mouseY = 0
+  var myFishSize = 20
+  var fishArray = []
 
-//start game
+//start game function
   function startGame () {
     myGameArea.start()
-    myFish = new MyFish('tomato', 10, 10)
-    otherFish = new OtherFish(10, 10, 20, 20, 'black', 10, 5)
+    myFish = new MyFish('tomato', myFishSize, myFishSize)
+    populateFishTank()
   }
 
 
-//create myGameArea object
+//myGameArea object
   var myGameArea = {
     canvas: $('canvas'),
     start: function () {
@@ -22,7 +24,7 @@ $(document).ready(function () {
       this.context = this.canvas.get(0).getContext('2d')
       // .get() grants access to the DOM nodes underlying the canvas jquery object.
       // getContext returns an object that provides methods and properties for drawing on the canvas
-      this.interval = setInterval(updateGameArea, 20)
+      this.interval = setInterval(updateGameArea, 50)
       this.canvas.on('mousemove', setMousePosition)
 
     },
@@ -32,7 +34,7 @@ $(document).ready(function () {
 
   }// end of myGameArea object
 
-//create myFish constructor
+//myFish constructor
   function MyFish (color, width, height) {
     this.width = width
     this.height = height
@@ -40,27 +42,30 @@ $(document).ready(function () {
     this.update = function(){
       this.context.fillStyle = color
       this.context.beginPath()
-      this.context.fillRect(mouseX - this.width/2,  mouseY - this.width/2, this.width, this.height)
+      this.context.fillRect(mouseX - this.width/2,  mouseY - this.height/2, this.width, this.height)
       //requestAnimationFrame(this.update);
     }
   }
 
-  function OtherFish(x, y, width, height, color, xspeed, yspeed){
+//otherFish constructor
+  function OtherFish(x, y, width, color, xspeed, yspeed){
     this.x = x
     this.y = y
     this.xspeed = xspeed
     this.yspeed = yspeed
     this.width = width
-    this.height = height
     this.context = myGameArea.context
-    this.move = function(){
+    this.display = function(){
       this.context.fillStyle = color
       this.context.beginPath()
-      this.context.fillRect(this.x, this.y, this.width, this.height)
+      this.context.fillRect(this.x, this.y, this.width, this.width)
+    }
+    this.move = function(){
+
       this.x = this.x + this.xspeed
       this.y = this.y + this.yspeed
     }
-     this.bounce = function(){
+    this.bounce = function(){
        if(this.x > canvasElement.width || this.x < 0){
          this.xspeed = this.xspeed * -1
        }
@@ -68,15 +73,85 @@ $(document).ready(function () {
          this.yspeed = this.yspeed * -1
        }
       }
+    this.remove = function(){
+      this.width = 0
+    }
+
   }
+
+  function populateFishTank(){
+     for (var i = 0; i < 10; i++){
+       fishArray.push(new OtherFish(Math.floor(Math.random() * 500), Math.floor(Math.random() * 500), Math.floor(Math.random() *50), 'black', 1, 0))
+     }
+
+  }
+
+  function anyOverlap(eachFish){
+
+      myFishLeft = mouseX
+      myFishRight = mouseX + myFish.width
+      myFishTop = mouseY
+      myFishBottom = mouseY + myFish.width
+      otherFishLeft = eachFish.x
+      otherFishRight = eachFish.x + eachFish.width
+      otherFishTop = eachFish.y
+      otherFishBottom = eachFish.y + eachFish.width
+
+      var overlap = !(myFishRight < otherFishLeft ||
+                 myFishLeft >= otherFishRight ||
+                 myFishBottom <= otherFishTop ||
+                 myFishTop >= otherFishBottom )
+       //if any expression in paranthesis are true, there is no overlap
+       //if all are false, there is overlap
+
+       var myFishIsBigger = (myFish.width > eachFish.width)
+
+       if(overlap && myFishIsBigger){
+         eachFish.remove()
+       }
+
+
+} //end of anyOverlap function
+
+
+
 
   function updateGameArea(){
     myGameArea.clear()
     myFish.update()
-    otherFish.move()
-    otherFish.bounce()
+    fishArray.forEach(function(eachFish){
+      eachFish.display()
+      eachFish.move()
+      eachFish.bounce()
+      anyOverlap(eachFish)
+    })
+
+
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////////////////////////////////Helper functions////////////////////////////////////
   function setMousePosition(e){
 
     mouseX = e.clientX - canvasPos.x
@@ -87,7 +162,6 @@ $(document).ready(function () {
       mouseY: mouseY
     }
   }
-
 
 //getPosition figures out where the canvas element is on the page
   function getPosition(e2){
@@ -106,6 +180,6 @@ $(document).ready(function () {
   var canvasElement = (document.querySelector('canvas'))
   var canvasPos = getPosition(canvasElement)
 
-
+/////////////////////////Start the Game!/////////////////////////////////////////
   startGame()
 }) // end of document.ready

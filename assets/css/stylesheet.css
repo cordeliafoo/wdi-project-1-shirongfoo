@@ -9,3 +9,8 @@ body {
 h1, div, p {
   align-self: center;
 }
+
+#myGameArea{
+  width: 800px;
+  height: 600px;
+}

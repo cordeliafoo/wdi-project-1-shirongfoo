@@ -2,16 +2,31 @@ $(document).ready(function () {
   var myFish
   var mouseX = 0
   var mouseY = 0
-  var myFishSize = 20
+  var myFishSize = 80
   var fishArray = []
   var score = $('#score')
   var counter = 0
-  var gameSpeed = 20
+  var gameSpeed = 10
+  var images  = []
+
+  var createImage = function(src){
+    var img = new Image()
+    img.src = src
+    return img
+  }
+  images.push(createImage('assets/fish1.png'))
+  images.push(createImage('assets/fish2.png'))
+  images.push(createImage('assets/fish3.png'))
+  images.push(createImage('assets/fish4.png'))
+  images.push(createImage('assets/fish5.png'))
+  images.push(createImage('assets/fish6.png'))
+  images.push(createImage('assets/fish7.png'))
+  images.push(createImage('assets/fish8.png'))
 
 // start game function
   function startGame () {
     myGameArea.start()
-    myFish = new MyFish('tomato', myFishSize, myFishSize)
+    myFish = new MyFish(images[0], myFishSize, myFishSize)
     populateFishTank()
   }
 
@@ -19,8 +34,6 @@ $(document).ready(function () {
   var myGameArea = {
     canvas: $('canvas'),
     start: function () {
-      // this.canvas.width(900)
-      // this.canvas.height(600)
       this.canvas.css('background-image', 'url("../assets/aquarium.png")')
       this.context = this.canvas.get(0).getContext('2d')
       // .get() grants access to the DOM nodes underlying the canvas jquery object.
@@ -31,18 +44,19 @@ $(document).ready(function () {
     clear: function () {
       this.context.clearRect(0, 0, this.canvas.width(), this.canvas.height())
     }
-
   }// end of myGameArea object
 
+
 // MyFish constructor
-  function MyFish (color, width, height) {
+  function MyFish (image, width, height) {
     this.width = width
     this.height = height
     this.context = myGameArea.context
-    this.update = function () {
-      this.context.fillStyle = color
-      this.context.beginPath()
-      this.context.fillRect(mouseX - this.width / 2, mouseY - this.height / 2, this.width, this.height)
+    this.display = function () {
+      // this.context.fillStyle = color
+      // this.context.beginPath()
+      // this.context.fillRect(mouseX - this.width / 2, mouseY - this.height / 2, this.width, this.height)
+      this.context.drawImage(image, mouseX-this.width/2, mouseY-this.height/2, this.width, this.height)
       // requestAnimationFrame(this.update);
     }
     this.remove = function () {
@@ -51,17 +65,19 @@ $(document).ready(function () {
   }
 
 // OtherFish constructor
-  function OtherFish (x, y, width, color, xspeed, yspeed) {
+  function OtherFish (x, y, width, color, xspeed, yspeed, image) {
     this.x = x
     this.y = y
     this.xspeed = xspeed
     this.yspeed = yspeed
     this.width = width
+    this.image = image
     this.context = myGameArea.context
     this.display = function () {
-      this.context.fillStyle = color
-      this.context.beginPath()
-      this.context.fillRect(this.x, this.y, this.width, this.width)
+      // this.context.fillStyle = color
+      // this.context.beginPath()
+      // this.context.fillRect(this.x, this.y, this.width, this.width)
+      return this.context.drawImage(image, this.x, this.y, this.width, this.width)
     }
     this.move = function () {
       this.x = this.x + this.xspeed
@@ -82,10 +98,22 @@ $(document).ready(function () {
     }
   }
 
+
+
   function populateFishTank () {
-    for (var i = 0; i < 15; i++) {
-      fishArray.push(new OtherFish(Math.floor(Math.random() * 500), Math.floor(Math.random() * 500), Math.floor(Math.random() * 20), 'white', randomIntFromInterval(-1, 1), 0))
-    }
+    fish1 = new OtherFish(0,5,30, 'white', randomIntFromInterval(-1, 1), 0, images[1])
+    fish2 = new OtherFish(0,50,55, 'white', randomIntFromInterval(-1, 1), 0, images[2])
+    fish3 = new OtherFish(0,100,60, 'white', randomIntFromInterval(-1, 1), 0, images[3])
+    fish4 = new OtherFish(0,150,70, 'white', randomIntFromInterval(-1, 1), 0, images[4])
+    fish5 = new OtherFish(0,180,90, 'white', randomIntFromInterval(-1, 1), 0, images[5])
+    fish6 = new OtherFish(0,300,110, 'white', randomIntFromInterval(-1, 1), 0, images[6])
+    fish7 = new OtherFish(0,300,110, 'white', randomIntFromInterval(-1, 1), 0, images[7])
+    fish8 = new OtherFish(0,400,160, 'white', randomIntFromInterval(-1, 1), 0, images[8])
+    fishArray.push(fish1, fish2, fish3, fish4, fish5, fish6, fish7, fish8)
+
+    // for (var i = 0; i < 15; i++) {
+    //   fishArray.push(new OtherFish(Math.floor(Math.random() * 500), Math.floor(Math.random() * 500), Math.floor(Math.random() * 200), 'white', randomIntFromInterval(-1, 1), 0, images[Math.floor(Math.random()*8)]))
+    // }
   }
 
   function anyOverlap () {
@@ -105,7 +133,7 @@ $(document).ready(function () {
                    myFishTop >= eachFishInArrayBottom)
        // if any expression in paranthesis are true, there is no overlap
        // if all are false, there is overlap
-
+       console.log(overlap)
       var myFishIsBigger = (myFish.width > eachFishInArray.width && myFish.height > eachFishInArray.width)
       var myFishIsSmaller = (myFish.width < eachFishInArray.width && myFish.height < eachFishInArray.width)
 
@@ -132,7 +160,7 @@ $(document).ready(function () {
         counter += 1
       }
       function addMoreFish () {
-          fishArray.push(new OtherFish(0, Math.floor(Math.random() * 500), Math.floor(Math.random() * 50), 'white', randomIntFromInterval(-1,1), 0))
+          fishArray.push(new OtherFish(0, Math.floor(Math.random() * 500), Math.floor(Math.random() * 50), 'white', randomIntFromInterval(-1,1), 0), images[0])
           console.log('add fish')
         console.log(fishArray.length)
       }
@@ -141,8 +169,11 @@ $(document).ready(function () {
 
   function updateGameArea () {
     myGameArea.clear()
-    myFish.update()
+    myFish.display()
+    console.log(fishArray)
     fishArray.forEach(function (eachFish) {
+      console.log(eachFish.x)
+      console.log(mouseX)
       eachFish.display()
       eachFish.move()
       eachFish.wrap()
@@ -150,8 +181,35 @@ $(document).ready(function () {
     anyOverlap()
     score.text('Score: ' + counter)
   }
+
+  //The error message is saying that cowpies is not an image element.
+  // You can only draw image elements onto the canvas.
+//When you called cowpies.push(new Cowpie); ]
+//you added something that was not an image to the array, which caused this error.
+
   // ///////////////////////Start the Game!/////////////////////////////////////////
   startGame()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // //////////////////////////////Helper functions////////////////////////////////////
   function setMousePosition (e) {
@@ -196,80 +254,74 @@ $(document).ready(function () {
     }
   }
 
-// ////////////////////////Panning the background/////////////////////////
-  // function draw (delta) {
-  //   totalSeconds += delta
-  //   var vx = 100 // background scrolls with a speed of 100pixels/second
-  //   var numImages = Math.ceil(canvas.width / img.width) + 1
-  //   var xpos = totalSeconds * vx % img.width // current x position
-  //   console.log(context)
-  //   context.save()
-  //   context.translate(-xpos, 0)
-  //   for (var i = 0; i < numImages; i++) {
-  //     context.drawImage(img, i * img.width, 0)
-  //   }
-  //   context.restore()
-  // }
-  //
-  // (function () {
-  //   window.requestAnimationFrame = window.requestAnimationFrame
-  //           || window.webkitRequestAnimationFrame
-  //           || window.mozRequestAnimationFrame
-  //           || function (callback) { window.setTimeout(callback, 1000 / 60) }
-  //
-  //   var canvas = document.querySelector('canvas')
-  //   var context = canvas.getContext('2d')
-  //   var looping = false
-  //   var totalSeconds = 0
-  //
-  //   var img = new Image()
-  //   img.onload = imageLoaded
-  //   img.src = 'assets/aquarium.png'
-  //
-  //   function imageLoaded () {
-  //     draw(0)
-  //
-  //     var btn = document.getElementById('btnStart')
-  //     btn.addEventListener('click', function () {
-  //       startStop()
-  //     })
-  //   }
-  //
-  //   var lastFrameTime = 0
-  //
-  //   function startStop () {
-  //     looping = !looping
-  //
-  //     if (looping) {
-  //       lastFrameTime = Date.now()
-  //       requestAnimationFrame(loop)
-  //     }
-  //   }
-  //
-  //   function loop () {
-  //     if (!looping) {
-  //       return
-  //     }
-  //
-  //     requestAnimationFrame(loop)
-  //
-  //     var now = Date.now()
-  //     var deltaSeconds = (now - lastFrameTime) / 1000
-  //     lastFrameTime = now
-  //     draw(deltaSeconds)
-  //   }
-  //
-  //   function draw (delta) {
-  //       /* Here happens some magic. */
-  //   }
-  // }())
-
-
-//   function draw(delta) {
-//     totalSeconds += delta;
-//     var x = -1 * (img.width - canvas.width) / 2 * (1 + Math.cos(totalSeconds / Math.PI));
-//     var y = -1 * (img.height - canvas.height) / 2 * (1 + -Math.sin(totalSeconds / Math.PI));
-//
-//     context.drawImage(img, x, y);
-// }
 }) // end of document.ready
+
+// $(document).ready(function(){
+//
+// var createImage = function(src){
+//   var img = new Image()
+//   img.src = src
+//   return img
+// }
+//
+// var images  = []
+//
+// images.push(createImage('assets/fish1.png'))
+// images.push(createImage('assets/fish2.png'))
+// images.push(createImage('assets/fish3.png'))
+// images.push(createImage('assets/fish4.png'))
+// images.push(createImage('assets/fish5.png'))
+// images.push(createImage('assets/fish6.png'))
+// images.push(createImage('assets/fish7.png'))
+// images.push(createImage('assets/fish8.png'))
+//
+//
+// function startGame(){
+//   myGameArea.start()
+//   player1Fish = new PlayerFish()
+//   player2Fish = new PlayerFish()
+//   // populateFishTank()
+// }
+//
+// var myGameArea = {
+//   gameAreaDiv: $('#myGameArea'),
+//   start: function(){
+//     this.gameAreaDiv.css('background-image', 'url("../assets/aquarium.png")')
+//     this.interval = setInterval(updateGame, 100)
+//   }
+//
+//
+// }
+//
+//
+// var PlayerFish = function(x, y){
+//   this.x = x
+//   this.y = y
+//   this.display = function(){
+//     console.log(images[0])
+//   }
+//
+// }
+//
+// function updateGame(){
+//   player1Fish.display()
+// }
+// startGame()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// })

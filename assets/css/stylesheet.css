@@ -10,7 +10,17 @@ h1, div, p {
   align-self: center;
 }
 
+#mainDiv{
+  margin-top: -10px;
+}
+
+/*
+
 #myGameArea{
   width: 800px;
   height: 600px;
+}*/
+
+hidden-images {
+  display: none;
 }

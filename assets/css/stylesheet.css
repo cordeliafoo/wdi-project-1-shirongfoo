@@ -2,6 +2,11 @@ body {
   display: flex;
   flex-direction: column;
   align-content: center;
+  font-family: 'Space Mono', monospace;
+  font-family: 'Nova Oval', cursive;
+  font-family: 'Baloo Bhaina', cursive;
+  font-size: 1em;
+  padding: 0;
 
 }
 
@@ -10,7 +15,10 @@ h1, div {
 }
 
 p {
-  align-self:
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+
 }
 
 #mainDiv{
@@ -22,15 +30,10 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
-/*
 
-#myGameArea{
-  width: 800px;
-  height: 600px;
-}*/
-
-hidden-images {
-  display: none;
+canvas{
+  margin-top: -10px;
 }

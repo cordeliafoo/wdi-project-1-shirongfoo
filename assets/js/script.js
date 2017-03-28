@@ -2,7 +2,7 @@ $(document).ready(function () {
   var myFish
   var mouseX = 0
   var mouseY = 0
-  var myFishSize = 60
+  var myFishSize = 50
   var fishArray = []
   var fishArrayTemplate = []
   var score = $('#score')
@@ -68,11 +68,6 @@ $(document).ready(function () {
       return
     }
   }
-  //
-  // function imageRepo = new function(){
-  //   this.width
-  // }
-
 // myGameArea object
   var myGameArea = {
     canvas: $('#canvas'),
@@ -115,8 +110,6 @@ $(document).ready(function () {
     this.image = image
     this.context = myGameArea.context
     this.display = function () {
-
-      this.context.fillRect(this.x, this.y, this.width, this.width)
       this.context.drawImage(this.image, this.x, this.y, this.width, this.width)
     }
     this.move = function () {
@@ -132,29 +125,29 @@ $(document).ready(function () {
         this.x = canvasElement.width
       }
     }
-    this.remove = function (index) {
-      // console.log('index is', index);
-      // fishArray.splice(index, 1, 0)
+    this.stop = function(){
+      this.xspeed = 0
+      this.yspeed = 0
     }
   }
 
   function populateFishTank () {
-    fish1 = new OtherFish(0, Math.floor(Math.random()*600),30, 'white', randomIntFromInterval(-1, 1), 0, createNewImage(1))
-    fish2 = new OtherFish(0, Math.floor(Math.random()*600),40, 'white', randomIntFromInterval(-1, 1), 0, createNewImage(2))
+    fish1 = new OtherFish(0, Math.floor(Math.random()*600),40, 'white', randomIntFromInterval(-1, 1), 0, createNewImage(1))
+    fish2 = new OtherFish(0, Math.floor(Math.random()*600),60, 'white', randomIntFromInterval(-1, 1), 0, createNewImage(2))
     fish3 = new OtherFish(0, Math.floor(Math.random()*600),80, 'white', randomIntFromInterval(-1, 1), 0, createNewImage(3))
     fish4 = new OtherFish(0, Math.floor(Math.random()*600),100, 'white', randomIntFromInterval(-1, 1), 0, createNewImage(4))
     fish5 = new OtherFish(0, Math.floor(Math.random()*600), 120, 'white', randomIntFromInterval(-1, 1), 0, createNewImage(5))
     fish6 = new OtherFish(0, Math.floor(Math.random()*600), 140, 'white', randomIntFromInterval(-1, 1), 0, createNewImage(6))
     fish7 = new OtherFish(0, Math.floor(Math.random()*600), 170, 'white', randomIntFromInterval(-1, 1), 0, createNewImage(7))
-    fish8 = new OtherFish(0, Math.floor(Math.random()*600),200, 'white', randomIntFromInterval(-1, 1), 0, createNewImage(8))
+    fish8 = new OtherFish(0, Math.floor(Math.random()*600), 300, 'white', randomIntFromInterval(-1, 1), 0, createNewImage(8))
+
     fishArrayTemplate.push(fish1, fish2, fish3, fish4, fish5, fish6, fish7, fish8)
 
-    fishArray.push(fish1, fish2, fish3, fish4, fish5, fish6, fish7, fish8)
+    for(var i = 0; i < 10; i++){
+      fishArray.push(new OtherFish(-1, Math.floor(Math.random()*600), Math.floor(Math.random()*100), 'white', randomIntFromInterval(-1,1)* (Math.floor(Math.random()*4)+1), 0, createNewImage(Math.floor(Math.random()*7)+1)))
+    }
+    // fishArray.push(fish1, fish2, fish3, fish4, fish5, fish6, fish7, fish8)
 
-
-    // for (var i = 0; i < 15; i++) {
-    //   fishArray.push(new OtherFish(Math.floor(Math.random() * 500), Math.floor(Math.random() * 500), Math.floor(Math.random() * 200), 'white', randomIntFromInterval(-1, 1), 0, images[Math.floor(Math.random()*8)]))
-    // }
   }
 
   function anyOverlap () {
@@ -195,59 +188,87 @@ $(document).ready(function () {
 
    }
 
-
   function spliceAddIncreaseScore(indexOfOverlap){
     fishArray.splice(indexOfOverlap, 1)
     fishArray.push(fishArrayTemplate[Math.floor(Math.random()*8)])
     //fishArray.push(fishArrayTemplate[Math.floor(Math.random()*8)])
-    // fishArray.push(fishArrayTemplate[Math.floor(Math.random()*8)])
+    //fishArray.push(fishArrayTemplate[Math.floor(Math.random()*8)])
+
     counter += 1
   }
 
   function changeFishSize(){
     console.log('counter is ', counter);
-    if(counter > 80){
-      myFish.image = createNewImage(8)
-      myFish.width = 200
-      myFish.height = 200
+
+    if(counter=== 210){
+      alert('YOU ARE THE KING OF THE SEA!')
+
+    }
+    else if(counter> 200){
+      myFish.width += 5
+      myFish.height += 5
+    }
+    else if(counter>190){
+      myFish.width += 5
+      myFish.height += 5
+    }
+    else if(counter> 180){
+      myFish.width += 5
+      myFish.height += 5
     }
 
-    else if(counter > 60){
-      myFish.image = createNewImage(7)
-      myFish.width = 100
-      myFish.height = 100
+    else if(counter > 160){
+      myFish.image = fishArrayTemplate[7].image
+      myFish.width = fishArrayTemplate[7].width
+      myFish.height = fishArrayTemplate[7].width
+
     }
 
-    else if(counter > 49){
-      myFish.image = createNewImage(6)
-      myFish.width = 80
-      myFish.height = 80
+    else if(counter > 140){
+      myFish.image = fishArrayTemplate[6].image
+      myFish.width = fishArrayTemplate[6].width
+      myFish.height = fishArrayTemplate[6].width
     }
 
-    else if(counter > 27){
-      myFish.image = createNewImage(5)
-      myFish.width = 60
-      myFish.height = 60
+    else if(counter > 110){
+      myFish.image = fishArrayTemplate[5].image
+      myFish.width = fishArrayTemplate[5].width
+      myFish.height = fishArrayTemplate[5].width
     }
 
-    else if(counter > 18){
-      myFish.image = createNewImage(4)
-      myFish.width = 50
-      myFish.height = 50
+    else if(counter > 80){
+     myFish.image = fishArrayTemplate[4].image
+     myFish.width = fishArrayTemplate[4].width
+     myFish.height = fishArrayTemplate[4].width
     }
 
-    else if(counter > 6){
+    else if(counter > 50){
+     myFish.image = fishArrayTemplate[3].image
+     myFish.width = fishArrayTemplate[3].width
+     myFish.height = fishArrayTemplate[3].width
+    }
+
+    else if(counter > 30){
       myFish.image = fishArrayTemplate[2].image
+      myFish.width = fishArrayTemplate[2].width
+      myFish.height = fishArrayTemplate[2].width
     }
 
-    else if (counter > 3){
+    else if (counter > 5){
       myFish.image = fishArrayTemplate[1].image
+      myFish.width = fishArrayTemplate[1].width
+      myFish.height = fishArrayTemplate[1].width
     }
   }
 
   function gameOver(){
     myFish.width = 0
-    console.log('oops you got eaten')
+    context.fillText('OOPS YOU GOT EATEN', 100, 200)
+    fishArray.forEach(function(eachFish){
+      eachFish.stop()
+    })
+    clearInterval(setIntervalReturn)
+
   }
 
   function updateGameArea () {
@@ -262,10 +283,11 @@ $(document).ready(function () {
     if(indexAndWidthOfOverlap.index === 0  || indexAndWidthOfOverlap.index && indexAndWidthOfOverlap.fishWidth <= myFish.width){
      spliceAddIncreaseScore(indexAndWidthOfOverlap.index)
      changeFishSize()
-   } else if(indexAndWidthOfOverlap.index === 0 || indexAndWidthOfOverlap.index && indexAndWidthOfOverlap.fishWidth > myFish.width){
+   } else if(indexAndWidthOfOverlap.index === 0 || indexAndWidthOfOverlap.index && indexAndWidthOfOverlap.fishWidth >= myFish.width){
      gameOver()
    }
     score.text('Score: ' + counter)
+
 
   }
 
@@ -276,6 +298,7 @@ $(document).ready(function () {
       populateFishTank()
       myFish = new MyFish(createNewImage(1), myFishSize, myFishSize)
       myGameArea.start()
+      setIntervalReturn = setInterval(populateFishTank, 10000)
 
     }
   startGame()

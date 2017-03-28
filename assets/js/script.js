@@ -13,7 +13,7 @@ $(document).ready(function () {
   var context = canvas.getContext('2d')
   var infdexPlusFishWidth = {}
 
-
+//function to include image source
   function createNewImage(number) {
     switch (number) {
       case 1:
@@ -68,15 +68,14 @@ $(document).ready(function () {
       return
     }
   }
+
+
 // myGameArea object
   var myGameArea = {
     canvas: $('#canvas'),
     context: canvas.getContext('2d'),
     start: function () {
-      this.canvas.css('background-image', 'url("../assets/images/aquarium.png")')
-
-      // .get() grants access to the DOM nodes underlying the canvas jquery object.
-      // getContext returns an object that provides methods and properties for drawing on the canvas
+      this.canvas.css('background-image', 'url("../assets/images/aquarium3.png")')
       this.interval = setInterval(updateGameArea, gameSpeed)
       // this.canvas.on('mousemove', setMousePosition)
       this.canvas.on('mousemove', setMousePosition)
@@ -132,24 +131,24 @@ $(document).ready(function () {
   }
 
   function populateFishTank () {
-    fish1 = new OtherFish(0, Math.floor(Math.random()*600),40, 'white', randomIntFromInterval(-1, 1), 0, createNewImage(1))
-    fish2 = new OtherFish(0, Math.floor(Math.random()*600),60, 'white', randomIntFromInterval(-1, 1), 0, createNewImage(2))
-    fish3 = new OtherFish(0, Math.floor(Math.random()*600),80, 'white', randomIntFromInterval(-1, 1), 0, createNewImage(3))
-    fish4 = new OtherFish(0, Math.floor(Math.random()*600),100, 'white', randomIntFromInterval(-1, 1), 0, createNewImage(4))
-    fish5 = new OtherFish(0, Math.floor(Math.random()*600), 120, 'white', randomIntFromInterval(-1, 1), 0, createNewImage(5))
-    fish6 = new OtherFish(0, Math.floor(Math.random()*600), 140, 'white', randomIntFromInterval(-1, 1), 0, createNewImage(6))
-    fish7 = new OtherFish(0, Math.floor(Math.random()*600), 170, 'white', randomIntFromInterval(-1, 1), 0, createNewImage(7))
-    fish8 = new OtherFish(0, Math.floor(Math.random()*600), 300, 'white', randomIntFromInterval(-1, 1), 0, createNewImage(8))
+    fish1 = new OtherFish(0, Math.floor(Math.random()*565),40, 'white', randomIntFromInterval(-1, 1), 0, createNewImage(1))
+    fish2 = new OtherFish(0, Math.floor(Math.random()*565),60, 'white', randomIntFromInterval(-1, 1), 0, createNewImage(2))
+    fish3 = new OtherFish(0, Math.floor(Math.random()*565),80, 'white', randomIntFromInterval(-1, 1), 0, createNewImage(3))
+    fish4 = new OtherFish(0, Math.floor(Math.random()*565),100, 'white', randomIntFromInterval(-1, 1), 0, createNewImage(4))
+    fish5 = new OtherFish(0, Math.floor(Math.random()*565), 120, 'white', randomIntFromInterval(-1, 1), 0, createNewImage(5))
+    fish6 = new OtherFish(0, Math.floor(Math.random()*565), 140, 'white', randomIntFromInterval(-1, 1), 0, createNewImage(6))
+    fish7 = new OtherFish(0, Math.floor(Math.random()*565), 170, 'white', randomIntFromInterval(-1, 1), 0, createNewImage(7))
+    fish8 = new OtherFish(0, Math.floor(Math.random()*565), 300, 'white', randomIntFromInterval(-1, 1), 0, createNewImage(8))
 
     fishArrayTemplate.push(fish1, fish2, fish3, fish4, fish5, fish6, fish7, fish8)
 
     for(var i = 0; i < 10; i++){
-      fishArray.push(new OtherFish(-1, Math.floor(Math.random()*600), Math.floor(Math.random()*100), 'white', randomIntFromInterval(-1,1)* (Math.floor(Math.random()*4)+1), 0, createNewImage(Math.floor(Math.random()*7)+1)))
+      fishArray.push(new OtherFish(-1, Math.floor(Math.random()*565), Math.floor(Math.random()*100), 'white', randomIntFromInterval(-1,1)* (Math.floor(Math.random()*4)+1), 0, createNewImage(Math.floor(Math.random()*7)+1)))
     }
-    // fishArray.push(fish1, fish2, fish3, fish4, fish5, fish6, fish7, fish8)
 
   }
 
+//check if myfish overlaps with any fish in the fishArray
   function anyOverlap () {
     var index
     var fishWidth
@@ -177,7 +176,6 @@ $(document).ready(function () {
        if(overlap){
        index = fishArray.indexOf(eachFishInArray)
        fishWidth = fishArray[index].width
-      //  console.log('overlapped fish width is ' + fishWidth)
       }
      })
     return {
@@ -188,33 +186,20 @@ $(document).ready(function () {
 
    }
 
+//function to splice overlapped fish, and replace spliced fish with a new fish
   function spliceAddIncreaseScore(indexOfOverlap){
     fishArray.splice(indexOfOverlap, 1)
     fishArray.push(fishArrayTemplate[Math.floor(Math.random()*8)])
-    //fishArray.push(fishArrayTemplate[Math.floor(Math.random()*8)])
-    //fishArray.push(fishArrayTemplate[Math.floor(Math.random()*8)])
-
     counter += 1
   }
 
+//change myfish size based on counter
   function changeFishSize(){
     console.log('counter is ', counter);
 
     if(counter=== 210){
-      alert('YOU ARE THE KING OF THE SEA!')
+      youWon()
 
-    }
-    else if(counter> 200){
-      myFish.width += 5
-      myFish.height += 5
-    }
-    else if(counter>190){
-      myFish.width += 5
-      myFish.height += 5
-    }
-    else if(counter> 180){
-      myFish.width += 5
-      myFish.height += 5
     }
 
     else if(counter > 160){
@@ -261,14 +246,35 @@ $(document).ready(function () {
     }
   }
 
+//stop fish, display alert box, and reload game
   function gameOver(){
     myFish.width = 0
-    context.fillText('OOPS YOU GOT EATEN', 100, 200)
+    myFish.height = 0
     fishArray.forEach(function(eachFish){
       eachFish.stop()
     })
     clearInterval(setIntervalReturn)
+    overlap = false
+    swal(
+      {title: "oops you got eaten",
+      text: "play again?"
+      },
+   function(){
+       location.reload();
+   }) //error! page not realoading after clicking sweetalert ok
+  }
 
+  function youWon(){
+    // fishArray = []
+    myFish.width += 5
+    myFish.width += 5
+    swal(
+      {title: "YOU WON!",
+      text: "play again?"
+      },
+   function(){
+       location.reload();
+   }) //error! page not realoading after clicking sweetalert ok
   }
 
   function updateGameArea () {
@@ -291,16 +297,14 @@ $(document).ready(function () {
 
   }
 
-  /////////////////////////Start the Game!/////////////////////////////////////////
-
   // start game function
   function startGame () {
       populateFishTank()
       myFish = new MyFish(createNewImage(1), myFishSize, myFishSize)
       myGameArea.start()
       setIntervalReturn = setInterval(populateFishTank, 10000)
-
     }
+
   startGame()
 
 
@@ -325,6 +329,9 @@ $(document).ready(function () {
 
 
 // //////////////////////////////Helper functions////////////////////////////////////
+ var canvasElement = document.querySelector('canvas')
+ var canvasPos = getPosition(canvasElement)
+
   function setMousePosition (e) {
     mouseX = e.clientX - canvasPos.x
     mouseY = e.clientY - canvasPos.y
@@ -352,8 +359,6 @@ $(document).ready(function () {
     }
   }
 
-  var canvasElement = (document.querySelector('canvas'))
-  var canvasPos = getPosition(canvasElement)
 
   function randomIntFromInterval (min, max) {
     // console.log(Math.floor(Math.random() * (max - min + 1) + min))

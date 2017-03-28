@@ -18,49 +18,49 @@ $(document).ready(function () {
     switch (number) {
       case 1:
       var img1 = new Image()
-      img1.src="/assets/images/fish1.png"
+      img1.src="../assets/images/fish1.png"
       return img1
        // return document.querySelector('#fish1')
       break
       case 2:
       var img2 = new Image()
-      img2.src="/assets/images/fish2.png"
+      img2.src="../assets/images/fish2.png"
       return img2
       // return document.querySelector('#fish2')
       break
       case 3:
       var img3 = new Image()
-      img3.src="/assets/images/fish3.png"
+      img3.src="../assets/images/fish3.png"
       return img3
       //return document.querySelector('#fish3')
       break
       case 4:
       var img4 = new Image()
-      img4.src="/assets/images/fish4.png"
+      img4.src="../assets/images/fish4.png"
       return img4
       //return document.querySelector('#fish4')
       break
       case 5:
       var img5 = new Image()
-      img5.src="/assets/images/fish5.png"
+      img5.src="../assets/images/fish5.png"
       return img5
       //return document.querySelector('#fish5')
       break
       case 6:
       var img6 = new Image()
-      img6.src="/assets/images/fish6.png"
+      img6.src="../assets/images/fish6.png"
       return img6
       //return document.querySelector('#fish6')
       break
       case 7:
       var img7 = new Image()
-      img7.src="/assets/images/fish7.png"
+      img7.src="../assets/images/fish7.png"
       return img7
       //return document.querySelector('#fish7')
       break
       case 8:
       var img8 = new Image()
-      img8.src="/assets/images/fish8.png"
+      img8.src="../assets/images/fish8.png"
       return img8
       //return document.querySelector('#fish8')
       break

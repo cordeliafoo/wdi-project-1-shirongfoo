@@ -2,16 +2,26 @@ body {
   display: flex;
   flex-direction: column;
   align-content: center;
-  justify-content: center;
 
 }
 
-h1, div, p {
+h1, div {
   align-self: center;
+}
+
+p {
+  align-self:
 }
 
 #mainDiv{
   margin-top: -10px;
+}
+
+#titleAndScoreDiv{
+  width: 800px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /*

@@ -315,11 +315,6 @@ createNewImage(8)
 
   startGame()
 
-  window.onload=function(){
-         myFish.display()
-  }
-
-
 
 
 

@@ -21,7 +21,7 @@ $(document).ready(function () {
         img1.addEventListener('load', function (){
           imageCheck[0] = 1
         })
-        img1.src = '../assets/images/fish1.png'
+        img1.src = 'assets/images/fish1.png'
         return img1
        // return document.querySelector('#fish1')
         break
@@ -30,7 +30,7 @@ $(document).ready(function () {
         img2.addEventListener('load', function (){
           imageCheck[1] = 1
         })
-        img2.src = '../assets/images/fish2.png'
+        img2.src = 'assets/images/fish2.png'
         return img2
       // return document.querySelector('#fish2')
         break
@@ -39,7 +39,7 @@ $(document).ready(function () {
         img3.addEventListener('load', function (){
           imageCheck[2] = 1
         })
-        img3.src = '../assets/images/fish3.png'
+        img3.src = 'assets/images/fish3.png'
         return img3
       // return document.querySelector('#fish3')
         break
@@ -48,7 +48,7 @@ $(document).ready(function () {
         img4.addEventListener('load', function (){
           imageCheck[3] = 1
         })
-        img4.src = '../assets/images/fish4.png'
+        img4.src = 'assets/images/fish4.png'
         return img4
       // return document.querySelector('#fish4')
         break
@@ -57,7 +57,7 @@ $(document).ready(function () {
         img5.addEventListener('load', function (){
           imageCheck[4] = 1
         })
-        img5.src = '../assets/images/fish5.png'
+        img5.src = 'assets/images/fish5.png'
         return img5
       // return document.querySelector('#fish5')
         break
@@ -66,7 +66,7 @@ $(document).ready(function () {
         img6.addEventListener('load', function (){
           imageCheck[5] = 1
         })
-        img6.src = '../assets/images/fish6.png'
+        img6.src = 'assets/images/fish6.png'
         return img6
       // return document.querySelector('#fish6')
         break
@@ -75,7 +75,7 @@ $(document).ready(function () {
         img7.addEventListener('load', function (){
           imageCheck[6] = 1
         })
-        img7.src = '../assets/images/fish7.png'
+        img7.src = 'assets/images/fish7.png'
         return img7
       // return document.querySelector('#fish7')
         break
@@ -84,7 +84,7 @@ $(document).ready(function () {
         img8.addEventListener('load', function (){
           imageCheck[7] = 1
         })
-        img8.src = '../assets/images/fish8.png'
+        img8.src = 'assets/images/fish8.png'
         return img8
       // return document.querySelector('#fish8')
         break
@@ -98,7 +98,7 @@ $(document).ready(function () {
     canvas: $('#canvas'),
     context: canvas.getContext('2d'),
     start: function () {
-      this.canvas.css('background-image', 'url("../assets/images/aquarium3.png")')
+      this.canvas.css('background-image', 'url("assets/images/aquarium3.png")')
       this.interval = setInterval(updateGameArea, gameSpeed)
       // this.canvas.on('mousemove', setMousePosition)
       this.canvas.on('mousemove', setMousePosition)

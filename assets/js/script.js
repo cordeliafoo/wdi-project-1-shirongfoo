@@ -276,8 +276,9 @@ $(document).ready(function () {
       },
    function () {
      console.log('clicked ok')
-     window.location.href = 'https://wdi-sg.github.io/wdi-project-1-shirongfoo/';
-   }) // error! page not realoading after clicking sweetalert ok
+     //window.location.href = 'https://wdi-sg.github.io/wdi-project-1-shirongfoo/';
+     startGame()
+   })
   }
 
   function youWon () {

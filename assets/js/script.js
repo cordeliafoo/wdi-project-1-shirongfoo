@@ -275,8 +275,7 @@ $(document).ready(function () {
         text: 'play again?'
       },
    function () {
-     window.location.reload()
-     window.location.href = 'https://wdi-sg.github.io/wdi-project-1-shirongfoo/';
+      window.location.reload(true);
    })
   }
 

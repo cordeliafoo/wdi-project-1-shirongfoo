@@ -7,12 +7,16 @@ $(document).ready(function () {
   var fishArrayTemplate = []
   var score = $('#score')
   var counter = 0
-  var gameSpeed = 20
+  var gameSpeed = 40
   var images = []
   var canvas = document.querySelector('canvas')
   var context = canvas.getContext('2d')
   var infdexPlusFishWidth = {}
   var imageCheck = [0, 0, 0, 0, 0, 0, 0, 0]
+  var biteSound = document.querySelector('.biteSound')
+  var fishtankBubbles = document.querySelector('.fishtankBubbles')
+  fishtankBubbles.volume = 0.1
+  var loseSound = document.querySelector('.loseSound')
 
 // function to include image source
   function createNewImage (number) {
@@ -148,6 +152,9 @@ $(document).ready(function () {
     this.move = function () {
       this.x = this.x + this.xspeed
       this.y = this.y + this.yspeed
+      if(this.xspeed > 0){
+        this.image.transform = 'scaleX(1)'
+      }
     }
     this.wrap = function () {
       if (this.x > canvasElement.width) {
@@ -186,27 +193,31 @@ $(document).ready(function () {
     var index
     var fishWidth
     fishArray.forEach(function (eachFishInArray) {
-      myFishLeft = mouseX
-      myFishRight = mouseX + myFish.width
-      myFishTop = mouseY
-      myFishBottom = mouseY + myFish.height
+      myFishLeft = mouseX-myFish.width/2
+      myFishRight = myFishLeft + myFish.width
+      myFishTop = mouseY - myFish.width/2
+      myFishBottom = myFishTop + myFish.width
 
-      eachFishInArrayWidth = eachFishInArray.width / 4
+      eachFishInArrayWidth = eachFishInArray.width / 10
 
-      eachFishInArrayLeft = eachFishInArray.x + eachFishInArrayWidth
-      eachFishInArrayRight = eachFishInArrayLeft + eachFishInArrayWidth * 2
 
-      eachFishInArrayTop = eachFishInArray.y + eachFishInArrayWidth
-      eachFishInArrayBottom = eachFishInArrayTop + eachFishInArrayWidth * 2
+      eachFishInArrayLeft = eachFishInArray.x + eachFishInArrayWidth * 3
+      eachFishInArrayRight = eachFishInArray.x + eachFishInArray.width - eachFishInArrayWidth * 3
+
+      eachFishInArrayTop = eachFishInArray.y + eachFishInArrayWidth * 3
+      eachFishInArrayBottom = eachFishInArray.y + eachFishInArray.width - eachFishInArrayWidth * 3
+
+
 
       overlap = !(myFishRight < eachFishInArrayLeft ||
-                   myFishLeft >= eachFishInArrayRight ||
-                   myFishBottom <= eachFishInArrayTop ||
-                   myFishTop >= eachFishInArrayBottom)
+                   myFishLeft > eachFishInArrayRight ||
+                   myFishBottom < eachFishInArrayTop ||
+                   myFishTop > eachFishInArrayBottom)
        // if any expression in paranthesis are true, there is no overlap
        // if all are false, there is overlap
 
       if (overlap) {
+         console.log(eachFishInArrayLeft, eachFishInArrayRight, eachFishInArrayTop, eachFishInArrayBottom)
         index = fishArray.indexOf(eachFishInArray)
         fishWidth = fishArray[index].width
       }
@@ -226,29 +237,29 @@ $(document).ready(function () {
 
 // change myfish size based on counter
   function changeFishSize () {
-    if (counter === 210) {
+    if (counter === 80) {
       youWon()
-    } else if (counter > 160) {
+    } else if (counter > 65) {
       myFish.image = fishArrayTemplate[7].image
       myFish.width = fishArrayTemplate[7].width
       myFish.height = fishArrayTemplate[7].width
-    } else if (counter > 140) {
+    } else if (counter > 55) {
       myFish.image = fishArrayTemplate[6].image
       myFish.width = fishArrayTemplate[6].width
       myFish.height = fishArrayTemplate[6].width
-    } else if (counter > 110) {
+    } else if (counter > 45) {
       myFish.image = fishArrayTemplate[5].image
       myFish.width = fishArrayTemplate[5].width
       myFish.height = fishArrayTemplate[5].width
-    } else if (counter > 80) {
+    } else if (counter > 35) {
       myFish.image = fishArrayTemplate[4].image
       myFish.width = fishArrayTemplate[4].width
       myFish.height = fishArrayTemplate[4].width
-    } else if (counter > 20) {
+    } else if (counter > 25) {
       myFish.image = fishArrayTemplate[3].image
       myFish.width = fishArrayTemplate[3].width
       myFish.height = fishArrayTemplate[3].width
-    } else if (counter > 10) {
+    } else if (counter > 15) {
       myFish.image = fishArrayTemplate[2].image
       myFish.width = fishArrayTemplate[2].width
       myFish.height = fishArrayTemplate[2].width
@@ -261,14 +272,15 @@ $(document).ready(function () {
 
 // stop fish, display alert box, and reload game
   function gameOver () {
-    myFish.width = 0
-    myFish.height = 0
+    myFish.x = -100
+    myFish.y = -100
     fishArray.forEach(function (eachFish) {
       eachFish.stop()
     })
 
     clearInterval(setIntervalReturn)
     clearInterval(myGameArea.interval)
+    loseSound.play()
 
     overlap = false
 
@@ -288,18 +300,21 @@ $(document).ready(function () {
     myFish.width += 5
     myFish.width += 5
     swal(
-      {title: 'YOU WON!',
-        text: 'play again?'
-      },
-   function () {
-     location.reload()
-   }) // error! page not realoading after clicking sweetalert ok
+      {
+        title: 'YOU WON!',
+        confirmButtonText: 'play again?',
+      }, function () {
+      window.location.reload(true);
+
+    }
+  )
   }
 
   function updateGameArea () {
     myGameArea.clear()
     myFish.display()
     fishArray.forEach(function (eachFish) {
+      // if(eachFish.xspeed )
       eachFish.display()
       eachFish.move()
       eachFish.wrap()
@@ -307,6 +322,13 @@ $(document).ready(function () {
     var indexAndWidthOfOverlap = anyOverlap()
 
     if (indexAndWidthOfOverlap.index === 0 || indexAndWidthOfOverlap.index && indexAndWidthOfOverlap.fishWidth <= myFish.width) {
+      biteSound.play()
+      setTimeout(function(){
+        biteSound.pause()
+        biteSound.currentTime = 0
+      }, 300)
+      // biteSound.pause()
+      // biteSound.currentTime = 0
       spliceAddIncreaseScore(indexAndWidthOfOverlap.index)
       changeFishSize()
     } else if (indexAndWidthOfOverlap.index === 0 || indexAndWidthOfOverlap.index && indexAndWidthOfOverlap.fishWidth >= myFish.width) {

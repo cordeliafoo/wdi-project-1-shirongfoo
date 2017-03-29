@@ -38,3 +38,7 @@ p {
 canvas{
   margin-top: -20px;
 }
+
+audio{
+  display: none;
+}

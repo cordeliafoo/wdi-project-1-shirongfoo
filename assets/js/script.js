@@ -12,14 +12,14 @@ $(document).ready(function () {
   var canvas = document.querySelector('canvas')
   var context = canvas.getContext('2d')
   var infdexPlusFishWidth = {}
-  var imageCheck=[0,0,0,0,0,0,0,0]
+  var imageCheck = [0, 0, 0, 0, 0, 0, 0, 0]
 
 // function to include image source
   function createNewImage (number) {
     switch (number) {
       case 1:
         var img1 = new Image()
-        img1.addEventListener('load', function (){
+        img1.addEventListener('load', function () {
           imageCheck[0] = 1
         })
         img1.src = 'assets/images/fish1.png'
@@ -28,7 +28,7 @@ $(document).ready(function () {
         break
       case 2:
         var img2 = new Image()
-        img2.addEventListener('load', function (){
+        img2.addEventListener('load', function () {
           imageCheck[1] = 1
         })
         img2.src = 'assets/images/fish2.png'
@@ -37,7 +37,7 @@ $(document).ready(function () {
         break
       case 3:
         var img3 = new Image()
-        img3.addEventListener('load', function (){
+        img3.addEventListener('load', function () {
           imageCheck[2] = 1
         })
         img3.src = 'assets/images/fish3.png'
@@ -46,7 +46,7 @@ $(document).ready(function () {
         break
       case 4:
         var img4 = new Image()
-        img4.addEventListener('load', function (){
+        img4.addEventListener('load', function () {
           imageCheck[3] = 1
         })
         img4.src = 'assets/images/fish4.png'
@@ -55,7 +55,7 @@ $(document).ready(function () {
         break
       case 5:
         var img5 = new Image()
-        img5.addEventListener('load', function (){
+        img5.addEventListener('load', function () {
           imageCheck[4] = 1
         })
         img5.src = 'assets/images/fish5.png'
@@ -64,7 +64,7 @@ $(document).ready(function () {
         break
       case 6:
         var img6 = new Image()
-        img6.addEventListener('load', function (){
+        img6.addEventListener('load', function () {
           imageCheck[5] = 1
         })
         img6.src = 'assets/images/fish6.png'
@@ -73,7 +73,7 @@ $(document).ready(function () {
         break
       case 7:
         var img7 = new Image()
-        img7.addEventListener('load', function (){
+        img7.addEventListener('load', function () {
           imageCheck[6] = 1
         })
         img7.src = 'assets/images/fish7.png'
@@ -82,7 +82,7 @@ $(document).ready(function () {
         break
       case 8:
         var img8 = new Image()
-        img8.addEventListener('load', function (){
+        img8.addEventListener('load', function () {
           imageCheck[7] = 1
         })
         img8.src = 'assets/images/fish8.png'
@@ -101,7 +101,6 @@ $(document).ready(function () {
     start: function () {
       this.canvas.css('background-image', 'url("assets/images/aquarium3.png")')
       this.interval = setInterval(updateGameArea, gameSpeed)
-      // this.canvas.on('mousemove', setMousePosition)
       this.canvas.on('mousemove', setMousePosition)
     },
     clear: function () {
@@ -116,13 +115,13 @@ $(document).ready(function () {
     this.height = height
     this.context = myGameArea.context
     this.display = function () {
-    var imageCheckVar = imageCheck.every(function(element){
+      var imageCheckVar = imageCheck.every(function (element) {
         return element === 1
       })
-      if(imageCheckVar){
-      this.context.drawImage(this.image, mouseX - this.width / 2, mouseY - this.height / 2, this.width, this.height)
+      if (imageCheckVar) {
+        this.context.drawImage(this.image, mouseX - this.width / 2, mouseY - this.height / 2, this.width, this.height)
+      }
     }
-  }
     this.remove = function () {
       this.width = 0
     }
@@ -139,13 +138,13 @@ $(document).ready(function () {
     this.context = myGameArea.context
 
     this.display = function () {
-      var imageCheckVar = imageCheck.every(function(element){
-          return element === 1
-        })
-      if(imageCheckVar){
-      this.context.drawImage(this.image, this.x, this.y, this.width, this.width)
+      var imageCheckVar = imageCheck.every(function (element) {
+        return element === 1
+      })
+      if (imageCheckVar) {
+        this.context.drawImage(this.image, this.x, this.y, this.width, this.width)
+      }
     }
-  }
     this.move = function () {
       this.x = this.x + this.xspeed
       this.y = this.y + this.yspeed
@@ -227,7 +226,6 @@ $(document).ready(function () {
 
 // change myfish size based on counter
   function changeFishSize () {
-
     if (counter === 210) {
       youWon()
     } else if (counter > 160) {
@@ -246,11 +244,11 @@ $(document).ready(function () {
       myFish.image = fishArrayTemplate[4].image
       myFish.width = fishArrayTemplate[4].width
       myFish.height = fishArrayTemplate[4].width
-    } else if (counter > 50) {
+    } else if (counter > 20) {
       myFish.image = fishArrayTemplate[3].image
       myFish.width = fishArrayTemplate[3].width
       myFish.height = fishArrayTemplate[3].width
-    } else if (counter > 30) {
+    } else if (counter > 10) {
       myFish.image = fishArrayTemplate[2].image
       myFish.width = fishArrayTemplate[2].width
       myFish.height = fishArrayTemplate[2].width
@@ -268,16 +266,22 @@ $(document).ready(function () {
     fishArray.forEach(function (eachFish) {
       eachFish.stop()
     })
+
     clearInterval(setIntervalReturn)
+    clearInterval(myGameArea.interval)
+
     overlap = false
+
     swal(
-      {title: 'oops you got eaten',
-        text: 'play again?'
-      },
-   function () {
+      {
+        title: 'oops you got eaten',
+        confirmButtonText: 'play again?',
+      }, function () {
       window.location.reload(true);
-   })
-  }
+
+    }
+  )
+ }
 
   function youWon () {
     // fishArray = []
@@ -301,6 +305,7 @@ $(document).ready(function () {
       eachFish.wrap()
     })
     var indexAndWidthOfOverlap = anyOverlap()
+
     if (indexAndWidthOfOverlap.index === 0 || indexAndWidthOfOverlap.index && indexAndWidthOfOverlap.fishWidth <= myFish.width) {
       spliceAddIncreaseScore(indexAndWidthOfOverlap.index)
       changeFishSize()
@@ -312,13 +317,33 @@ $(document).ready(function () {
 
   // start game function
   function startGame () {
+    myFish
+    mouseX = 0
+    mouseY = 0
+    myFishSize = 50
+    fishArray = []
+    fishArrayTemplate = []
+    score = $('#score')
+    counter = 0
+    gameSpeed = 20
+    images = []
+    canvas = document.querySelector('canvas')
+    context = canvas.getContext('2d')
+    infdexPlusFishWidth = {}
+    imageCheck = [0, 0, 0, 0, 0, 0, 0, 0]
+    myGameArea.clear()
+    myGameArea.start()
     populateFishTank()
     myFish = new MyFish(createNewImage(1), myFishSize, myFishSize)
-    myGameArea.start()
     setIntervalReturn = setInterval(populateFishTank, 10000)
   }
 
   startGame()
+
+
+
+
+
 
 
 

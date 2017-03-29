@@ -1,21 +1,54 @@
-body {
+/*body {
   margin-top: -20px;
   display: flex;
   flex-direction: column;
   align-content: center;
+  justify-content: center;
   font-family: 'Space Mono', monospace;
   font-family: 'Nova Oval', cursive;
   font-family: 'Baloo Bhaina', cursive;
-  font-size: 1em;
-  padding: 0;
+  font-size: 1.2em;
+  padding-bottom: 0;
 
+}*/
+
+#titleAndScoreDiv{
+  width:  90%;
+  height: 100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Baloo Bhaina', cursive;
+  margin-bottom: -25px;
+  /*position: relative;*/
+}
+h1{
+    flex: 12 0 0;
+    text-align: center;
 }
 
+p{
+  flex: 1 0 0;
+}
+
+#canvasDiv{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+audio{
+  display: none;
+}
+/*
 h1, div {
   align-self: center;
-}
+}*/
 
-p {
+/*p {
   position: absolute;
   right: -120px;
   bottom: 20px;
@@ -26,19 +59,8 @@ p {
   margin-top: -10px;
 }
 
-#titleAndScoreDiv{
-  width: 800px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
 
 
 canvas{
   margin-top: -20px;
-}
-
-audio{
-  display: none;
 }

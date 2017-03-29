@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
   var myFish
   var mouseX = 0
@@ -7,16 +8,27 @@ $(document).ready(function () {
   var fishArrayTemplate = []
   var score = $('#score')
   var counter = 0
-  var gameSpeed = 40
+  var gameSpeed = 60
   var images = []
   var canvas = document.querySelector('canvas')
   var context = canvas.getContext('2d')
-  var infdexPlusFishWidth = {}
   var imageCheck = [0, 0, 0, 0, 0, 0, 0, 0]
+  var fish1
+  var fish2
+  var fish3
+  var fish4
+  var fish5
+  var fish6
+  var fish7
+  var fish8
+  // var fishSizeArray = [5, 10, 15, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130,140, 150, 160,170, 180, 200, 210, 220]
+
+  //sound variables
   var biteSound = document.querySelector('.biteSound')
   var fishtankBubbles = document.querySelector('.fishtankBubbles')
   fishtankBubbles.volume = 0.1
   var loseSound = document.querySelector('.loseSound')
+  var winSound = document.querySelector('.winSound')
 
 // function to include image source
   function createNewImage (number) {
@@ -132,7 +144,7 @@ $(document).ready(function () {
   }
 
 // OtherFish constructor
-  function OtherFish (x, y, width, color, xspeed, yspeed, image) {
+  function OtherFish (x, y, width, xspeed, yspeed, image) {
     this.x = x
     this.y = y
     this.xspeed = xspeed
@@ -172,21 +184,22 @@ $(document).ready(function () {
   }
 
   function populateFishTank () {
-    fish1 = new OtherFish(0, Math.floor(Math.random() * 565), 40, 'white', randomIntFromInterval(-1, 1), 0, createNewImage(1))
-    fish2 = new OtherFish(0, Math.floor(Math.random() * 565), 60, 'white', randomIntFromInterval(-1, 1), 0, createNewImage(2))
-    fish3 = new OtherFish(0, Math.floor(Math.random() * 565), 80, 'white', randomIntFromInterval(-1, 1), 0, createNewImage(3))
-    fish4 = new OtherFish(0, Math.floor(Math.random() * 565), 100, 'white', randomIntFromInterval(-1, 1), 0, createNewImage(4))
-    fish5 = new OtherFish(0, Math.floor(Math.random() * 565), 120, 'white', randomIntFromInterval(-1, 1), 0, createNewImage(5))
-    fish6 = new OtherFish(0, Math.floor(Math.random() * 565), 140, 'white', randomIntFromInterval(-1, 1), 0, createNewImage(6))
-    fish7 = new OtherFish(0, Math.floor(Math.random() * 565), 170, 'white', randomIntFromInterval(-1, 1), 0, createNewImage(7))
-    fish8 = new OtherFish(0, Math.floor(Math.random() * 565), 300, 'white', randomIntFromInterval(-1, 1), 0, createNewImage(8))
+    fish1 = new OtherFish(0, Math.floor(Math.random() * 565), 40, randomIntFromInterval(-1, 1), 0, createNewImage(1))
+    fish2 = new OtherFish(0, Math.floor(Math.random() * 565), 60, randomIntFromInterval(-1, 1), 0, createNewImage(2))
+    fish3 = new OtherFish(0, Math.floor(Math.random() * 565), 80, randomIntFromInterval(-1, 1), 0, createNewImage(3))
+    fish4 = new OtherFish(0, Math.floor(Math.random() * 565), 100, randomIntFromInterval(-1, 1), 0, createNewImage(4))
+    fish5 = new OtherFish(0, Math.floor(Math.random() * 565), 120, randomIntFromInterval(-1, 1), 0, createNewImage(5))
+    fish6 = new OtherFish(0, Math.floor(Math.random() * 565), 140, randomIntFromInterval(-1, 1), 0, createNewImage(6))
+    fish7 = new OtherFish(0, Math.floor(Math.random() * 565), 170, randomIntFromInterval(-1, 1), 0, createNewImage(7))
+    fish8 = new OtherFish(0, Math.floor(Math.random() * 565), 300, randomIntFromInterval(-1, 1), 0, createNewImage(8))
 
     fishArrayTemplate.push(fish1, fish2, fish3, fish4, fish5, fish6, fish7, fish8)
 
-    for (var i = 0; i < 10; i++) {
-      fishArray.push(new OtherFish(-1, Math.floor(Math.random() * 565), Math.floor(Math.random() * 100), 'white', randomIntFromInterval(-1, 1) * (Math.floor(Math.random() * 4) + 1), 0, createNewImage(Math.floor(Math.random() * 7) + 1)))
+    for (var i = 0; i < 1; i++) {
+      fishArray.push(new OtherFish(-1, Math.floor(Math.random() * 565), Math.floor(Math.random() * 100), randomIntFromInterval(-1, 1) * (Math.floor(Math.random() * 4) + 1), 0, createNewImage(Math.floor(Math.random() * 7) + 1)))
     }
   }
+
 
 // check if myfish overlaps with any fish in the fishArray
   function anyOverlap () {
@@ -272,8 +285,8 @@ $(document).ready(function () {
 
 // stop fish, display alert box, and reload game
   function gameOver () {
-    myFish.x = -100
-    myFish.y = -100
+    myFish.width = 0
+    myFish.height = 0
     fishArray.forEach(function (eachFish) {
       eachFish.stop()
     })
@@ -286,7 +299,7 @@ $(document).ready(function () {
 
     swal(
       {
-        title: 'oops you got eaten',
+        title: 'oops you got eaten :(',
         confirmButtonText: 'play again?',
       }, function () {
       window.location.reload(true);
@@ -299,6 +312,7 @@ $(document).ready(function () {
     // fishArray = []
     myFish.width += 5
     myFish.width += 5
+    winSound.play()
     swal(
       {
         title: 'YOU WON!',
@@ -339,7 +353,6 @@ $(document).ready(function () {
 
   // start game function
   function startGame () {
-    myFish
     mouseX = 0
     mouseY = 0
     myFishSize = 50
@@ -351,13 +364,12 @@ $(document).ready(function () {
     images = []
     canvas = document.querySelector('canvas')
     context = canvas.getContext('2d')
-    infdexPlusFishWidth = {}
     imageCheck = [0, 0, 0, 0, 0, 0, 0, 0]
     myGameArea.clear()
     myGameArea.start()
     populateFishTank()
     myFish = new MyFish(createNewImage(1), myFishSize, myFishSize)
-    setIntervalReturn = setInterval(populateFishTank, 10000)
+    setIntervalReturn = setInterval(populateFishTank, 2500)
   }
 
   startGame()
@@ -417,8 +429,14 @@ $(document).ready(function () {
     } else if (randomInt === -1) {
       return -1
     } else if (randomInt === 0) {
-      return 1
+      return 2
     }
+  }
+
+  // Returns a random integer between min (included) and max (included)
+
+  function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
   function checkKeyPress (e) {

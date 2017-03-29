@@ -307,7 +307,9 @@ $(document).ready(function () {
 
   startGame()
 
-
+  window.onload=function(){
+         myFish.display()
+  }
 
 
 

@@ -12,15 +12,23 @@ $(document).ready(function () {
   var images = []
   var canvas = document.querySelector('canvas')
   var context = canvas.getContext('2d')
-  var imageCheck = [0, 0, 0, 0, 0, 0, 0, 0]
+  var imageCheck = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   var fish1
+  var fish1a
   var fish2
+  var fish2a
   var fish3
+  var fish3a
   var fish4
+  var fish4a
   var fish5
+  var fish5a
   var fish6
+  var fish6a
   var fish7
+  var fish7a
   var fish8
+  var fish8a
   // var fishSizeArray = [5, 10, 15, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130,140, 150, 160,170, 180, 200, 210, 220]
 
   //sound variables
@@ -40,7 +48,6 @@ $(document).ready(function () {
         })
         img1.src = 'assets/images/fish1.png'
         return img1
-       // return document.querySelector('#fish1')
         break
       case 2:
         var img2 = new Image()
@@ -49,7 +56,6 @@ $(document).ready(function () {
         })
         img2.src = 'assets/images/fish2.png'
         return img2
-      // return document.querySelector('#fish2')
         break
       case 3:
         var img3 = new Image()
@@ -58,7 +64,6 @@ $(document).ready(function () {
         })
         img3.src = 'assets/images/fish3.png'
         return img3
-      // return document.querySelector('#fish3')
         break
       case 4:
         var img4 = new Image()
@@ -67,7 +72,6 @@ $(document).ready(function () {
         })
         img4.src = 'assets/images/fish4.png'
         return img4
-      // return document.querySelector('#fish4')
         break
       case 5:
         var img5 = new Image()
@@ -76,7 +80,6 @@ $(document).ready(function () {
         })
         img5.src = 'assets/images/fish5.png'
         return img5
-      // return document.querySelector('#fish5')
         break
       case 6:
         var img6 = new Image()
@@ -85,7 +88,6 @@ $(document).ready(function () {
         })
         img6.src = 'assets/images/fish6.png'
         return img6
-      // return document.querySelector('#fish6')
         break
       case 7:
         var img7 = new Image()
@@ -94,7 +96,6 @@ $(document).ready(function () {
         })
         img7.src = 'assets/images/fish7.png'
         return img7
-      // return document.querySelector('#fish7')
         break
       case 8:
         var img8 = new Image()
@@ -103,13 +104,82 @@ $(document).ready(function () {
         })
         img8.src = 'assets/images/fish8.png'
         return img8
-      // return document.querySelector('#fish8')
         break
       default:
         return
     }
   }
 
+  function createNewImageMirror(number){
+    switch (number) {
+    case 1:
+        var img9 = new Image()
+        img9.addEventListener('load', function () {
+          imageCheck[8] = 1
+        })
+        img9.src = 'assets/images/fish1a.png'
+        return img9
+        break
+    case 2:
+          var img10 = new Image()
+          img10.addEventListener('load', function () {
+            imageCheck[9] = 1
+          })
+          img10.src = 'assets/images/fish2a.png'
+          return img10
+          break
+     case 3:
+          var img11 = new Image()
+          img11.addEventListener('load', function () {
+            imageCheck[10] = 1
+          })
+          img11.src = 'assets/images/fish3a.png'
+          return img11
+          break
+     case 4:
+          var img12 = new Image()
+          img12.addEventListener('load', function () {
+            imageCheck[11] = 1
+          })
+          img12.src = 'assets/images/fish4a.png'
+          return img12
+          break
+     case 5:
+          var img13 = new Image()
+          img13.addEventListener('load', function () {
+            imageCheck[12] = 1
+          })
+          img13.src = 'assets/images/fish5a.png'
+          return img13
+          break
+     case 6:
+          var img14 = new Image()
+          img14.addEventListener('load', function () {
+            imageCheck[13] = 1
+          })
+          img14.src = 'assets/images/fish6a.png'
+          return img14
+          break
+     case 7:
+          var img15 = new Image()
+          img15.addEventListener('load', function () {
+            imageCheck[14] = 1
+          })
+          img15.src = 'assets/images/fish7a.png'
+          return img15
+          break
+     case 8:
+          var img16 = new Image()
+          img16.addEventListener('load', function () {
+            imageCheck[15] = 1
+          })
+          img16.src = 'assets/images/fish8a.png'
+          return img16
+          break
+          default:
+            return
+          }
+  }
 // myGameArea object
   var myGameArea = {
     canvas: $('#canvas'),
@@ -164,9 +234,6 @@ $(document).ready(function () {
     this.move = function () {
       this.x = this.x + this.xspeed
       this.y = this.y + this.yspeed
-      if(this.xspeed > 0){
-        this.image.transform = 'scaleX(1)'
-      }
     }
     this.wrap = function () {
       if (this.x > canvasElement.width) {
@@ -192,11 +259,24 @@ $(document).ready(function () {
     fish6 = new OtherFish(0, Math.floor(Math.random() * 565), 140, randomIntFromInterval(-1, 1), 0, createNewImage(6))
     fish7 = new OtherFish(0, Math.floor(Math.random() * 565), 170, randomIntFromInterval(-1, 1), 0, createNewImage(7))
     fish8 = new OtherFish(0, Math.floor(Math.random() * 565), 300, randomIntFromInterval(-1, 1), 0, createNewImage(8))
+    fish1a = new OtherFish(0, Math.floor(Math.random() * 565), 40, randomIntFromInterval(-1, 1), 0, createNewImage(9))
+    fish2a = new OtherFish(0, Math.floor(Math.random() * 565), 40, randomIntFromInterval(-1, 1), 0, createNewImage(10))
+    fish3a = new OtherFish(0, Math.floor(Math.random() * 565), 40, randomIntFromInterval(-1, 1), 0, createNewImage(11))
+    fish4a = new OtherFish(0, Math.floor(Math.random() * 565), 40, randomIntFromInterval(-1, 1), 0, createNewImage(12))
+    fish5a = new OtherFish(0, Math.floor(Math.random() * 565), 40, randomIntFromInterval(-1, 1), 0, createNewImage(13))
+    fish6a = new OtherFish(0, Math.floor(Math.random() * 565), 40, randomIntFromInterval(-1, 1), 0, createNewImage(14))
+    fish7a = new OtherFish(0, Math.floor(Math.random() * 565), 40, randomIntFromInterval(-1, 1), 0, createNewImage(15))
+    fish8a = new OtherFish(0, Math.floor(Math.random() * 565), 40, randomIntFromInterval(-1, 1), 0, createNewImage(16))
 
     fishArrayTemplate.push(fish1, fish2, fish3, fish4, fish5, fish6, fish7, fish8)
 
-    for (var i = 0; i < 1; i++) {
-      fishArray.push(new OtherFish(-1, Math.floor(Math.random() * 450), Math.floor(Math.random() * 100), randomIntFromInterval(-1, 1) * (Math.floor(Math.random() * 4) + 1), 0, createNewImage(Math.floor(Math.random() * 7) + 1)))
+
+    var resultFromRandomFunction = randomIntFromInterval(-1, 1)
+
+    if(resultFromRandomFunction === -1){
+      fishArray.push(new OtherFish(-1, Math.floor(Math.random() * 450), Math.floor(Math.random() * 100), resultFromRandomFunction * (Math.floor(Math.random() * 4) + 1), 0, createNewImageMirror(Math.floor(Math.random() * 7) + 1)))
+    } else if(resultFromRandomFunction === 1 ) {
+      fishArray.push(new OtherFish(-1, Math.floor(Math.random() * 450), Math.floor(Math.random() * 100), resultFromRandomFunction * (Math.floor(Math.random() * 4) + 1), 0, createNewImage(Math.floor(Math.random() * 7) + 1)))
     }
   }
 
@@ -328,7 +408,7 @@ $(document).ready(function () {
     myGameArea.clear()
     myFish.display()
     fishArray.forEach(function (eachFish) {
-      // if(eachFish.xspeed )
+
       eachFish.display()
       eachFish.move()
       eachFish.wrap()

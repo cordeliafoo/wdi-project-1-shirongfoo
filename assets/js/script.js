@@ -196,7 +196,7 @@ $(document).ready(function () {
     fishArrayTemplate.push(fish1, fish2, fish3, fish4, fish5, fish6, fish7, fish8)
 
     for (var i = 0; i < 1; i++) {
-      fishArray.push(new OtherFish(-1, Math.floor(Math.random() * 565), Math.floor(Math.random() * 100), randomIntFromInterval(-1, 1) * (Math.floor(Math.random() * 4) + 1), 0, createNewImage(Math.floor(Math.random() * 7) + 1)))
+      fishArray.push(new OtherFish(-1, Math.floor(Math.random() * 450), Math.floor(Math.random() * 100), randomIntFromInterval(-1, 1) * (Math.floor(Math.random() * 4) + 1), 0, createNewImage(Math.floor(Math.random() * 7) + 1)))
     }
   }
 

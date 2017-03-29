@@ -13,6 +13,7 @@ $(document).ready(function () {
   var context = canvas.getContext('2d')
   var infdexPlusFishWidth = {}
   var imageCheck=[0,0,0,0,0,0,0,0]
+
 // function to include image source
   function createNewImage (number) {
     switch (number) {
@@ -226,7 +227,6 @@ $(document).ready(function () {
 
 // change myfish size based on counter
   function changeFishSize () {
-    console.log('counter is ', counter)
 
     if (counter === 210) {
       youWon()
@@ -275,7 +275,8 @@ $(document).ready(function () {
         text: 'play again?'
       },
    function () {
-     location.reload()
+     console.log('clicked ok')
+     window.location.href = 'https://wdi-sg.github.io/wdi-project-1-shirongfoo/';
    }) // error! page not realoading after clicking sweetalert ok
   }
 
@@ -297,7 +298,6 @@ $(document).ready(function () {
     myFish.display()
     fishArray.forEach(function (eachFish) {
       eachFish.display()
-      console.log(eachFish);
       eachFish.move()
       eachFish.wrap()
     })
@@ -320,6 +320,17 @@ $(document).ready(function () {
   }
 
   startGame()
+
+
+
+
+
+
+
+
+
+
+
 
 // //////////////////////////////Helper functions////////////////////////////////////
   var canvasElement = document.querySelector('canvas')
@@ -368,6 +379,7 @@ $(document).ready(function () {
     switch (e.keyCode) {
       case 37:
         console.log(myFish.x)
+
         break
       case 38: console.log('up keyp pressed')
         break

@@ -13,6 +13,14 @@ $(document).ready(function () {
   var context = canvas.getContext('2d')
   var infdexPlusFishWidth = {}
 
+createNewImage(1)
+createNewImage(2)
+createNewImage(3)
+createNewImage(4)
+createNewImage(5)
+createNewImage(6)
+createNewImage(7)
+createNewImage(8)
 //function to include image source
   function createNewImage(number) {
     switch (number) {

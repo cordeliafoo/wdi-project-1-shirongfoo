@@ -29,6 +29,7 @@ $(document).ready(function () {
   var fish7a
   var fish8
   var fish8a
+  var resultFromRandomFunction
   // var fishSizeArray = [5, 10, 15, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130,140, 150, 160,170, 180, 200, 210, 220]
 
   //sound variables
@@ -271,11 +272,12 @@ $(document).ready(function () {
     fishArrayTemplate.push(fish1, fish2, fish3, fish4, fish5, fish6, fish7, fish8)
 
 
-    var resultFromRandomFunction = randomIntFromInterval(-1, 1)
 
     if(resultFromRandomFunction === -1){
+      console.log('left')
       fishArray.push(new OtherFish(-1, Math.floor(Math.random() * 450), Math.floor(Math.random() * 100), resultFromRandomFunction * (Math.floor(Math.random() * 4) + 1), 0, createNewImageMirror(Math.floor(Math.random() * 7) + 1)))
     } else if(resultFromRandomFunction === 1 ) {
+      console.log('right')
       fishArray.push(new OtherFish(-1, Math.floor(Math.random() * 450), Math.floor(Math.random() * 100), resultFromRandomFunction * (Math.floor(Math.random() * 4) + 1), 0, createNewImage(Math.floor(Math.random() * 7) + 1)))
     }
   }
@@ -429,6 +431,8 @@ $(document).ready(function () {
       gameOver()
     }
     score.text('Score: ' + counter)
+
+     resultFromRandomFunction = randomIntFromInterval(-1, 1)
   }
 
   // start game function
@@ -449,7 +453,7 @@ $(document).ready(function () {
     myGameArea.start()
     populateFishTank()
     myFish = new MyFish(createNewImage(1), myFishSize, myFishSize)
-    setIntervalReturn = setInterval(populateFishTank, 2500)
+    setIntervalReturn = setInterval(populateFishTank, 2000)
   }
 
   startGame()

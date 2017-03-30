@@ -39,6 +39,8 @@ $(document).ready(function () {
   var loseSound = document.querySelector('.loseSound')
   var winSound = document.querySelector('.winSound')
 
+
+
 // function to include image source
   function createNewImage (number) {
     switch (number) {
@@ -384,7 +386,8 @@ $(document).ready(function () {
         title: 'oops you got eaten :(',
         confirmButtonText: 'play again?',
       }, function () {
-      window.location.reload(true);
+      //window.location.reload(true);
+      startGame()
 
     }
   )
@@ -456,10 +459,18 @@ $(document).ready(function () {
     setIntervalReturn = setInterval(populateFishTank, 2000)
   }
 
-  startGame()
 
+  //load instructions and start game
+    swal(
+      {
+        title: "how to play?",
+        text: "move the mouse around to eat smaller fishes.  avoid the bigger ones, they'll eat you up!",
+        confirmButtonText: 'start game',
+      }, function () {
+      startGame()
 
-
+    }
+   )
 
 
 

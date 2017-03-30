@@ -3,7 +3,6 @@ $(document).ready(function () {
   var myFish
   var mouseX = 0
   var mouseY = 0
-  var myFishSize = 50
   var fishArray = []
   var fishArrayTemplate = []
   var score = $('#score')
@@ -13,6 +12,7 @@ $(document).ready(function () {
   var canvas = document.querySelector('canvas')
   var context = canvas.getContext('2d')
   var imageCheck = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  var myFishSize = canvas.width/23
   var fish1
   var fish1a
   var fish2
@@ -185,15 +185,26 @@ $(document).ready(function () {
   }
 // myGameArea object
   var myGameArea = {
-    canvas: $('#canvas'),
+    // canvas: $('#canvas'),
+    canvas: canvas,
     context: canvas.getContext('2d'),
+    // start: function () {
+    //   this.canvas.css('background-image', 'url("assets/images/aquarium3.png")')
+    //   this.interval = setInterval(updateGameArea, gameSpeed)
+    //   this.canvas.on('mousemove', setMousePosition)
+    // },
+    // clear: function () {
+    //   this.context.clearRect(0, 0, this.canvas.width(), this.canvas.height())
+    // }
+
     start: function () {
-      this.canvas.css('background-image', 'url("assets/images/aquarium3.png")')
+      this.canvas.style.backgroundImage =  "url('assets/images/aquarium3.png')"
       this.interval = setInterval(updateGameArea, gameSpeed)
-      this.canvas.on('mousemove', setMousePosition)
+      this.canvas.addEventListener('mousemove', setMousePosition)
     },
+
     clear: function () {
-      this.context.clearRect(0, 0, this.canvas.width(), this.canvas.height())
+      this.context.clearRect(0, 0, this.canvas.width, this.canvas.height)
     }
   }// end of myGameArea object
 
@@ -254,22 +265,22 @@ $(document).ready(function () {
   }
 
   function populateFishTank () {
-    fish1 = new OtherFish(0, Math.floor(Math.random() * 565), 40, randomIntFromInterval(-1, 1), 0, createNewImage(1))
-    fish2 = new OtherFish(0, Math.floor(Math.random() * 565), 60, randomIntFromInterval(-1, 1), 0, createNewImage(2))
-    fish3 = new OtherFish(0, Math.floor(Math.random() * 565), 80, randomIntFromInterval(-1, 1), 0, createNewImage(3))
-    fish4 = new OtherFish(0, Math.floor(Math.random() * 565), 100, randomIntFromInterval(-1, 1), 0, createNewImage(4))
-    fish5 = new OtherFish(0, Math.floor(Math.random() * 565), 120, randomIntFromInterval(-1, 1), 0, createNewImage(5))
-    fish6 = new OtherFish(0, Math.floor(Math.random() * 565), 140, randomIntFromInterval(-1, 1), 0, createNewImage(6))
-    fish7 = new OtherFish(0, Math.floor(Math.random() * 565), 170, randomIntFromInterval(-1, 1), 0, createNewImage(7))
-    fish8 = new OtherFish(0, Math.floor(Math.random() * 565), 300, randomIntFromInterval(-1, 1), 0, createNewImage(8))
-    fish1a = new OtherFish(0, Math.floor(Math.random() * 565), 40, randomIntFromInterval(-1, 1), 0, createNewImage(9))
-    fish2a = new OtherFish(0, Math.floor(Math.random() * 565), 40, randomIntFromInterval(-1, 1), 0, createNewImage(10))
-    fish3a = new OtherFish(0, Math.floor(Math.random() * 565), 40, randomIntFromInterval(-1, 1), 0, createNewImage(11))
-    fish4a = new OtherFish(0, Math.floor(Math.random() * 565), 40, randomIntFromInterval(-1, 1), 0, createNewImage(12))
-    fish5a = new OtherFish(0, Math.floor(Math.random() * 565), 40, randomIntFromInterval(-1, 1), 0, createNewImage(13))
-    fish6a = new OtherFish(0, Math.floor(Math.random() * 565), 40, randomIntFromInterval(-1, 1), 0, createNewImage(14))
-    fish7a = new OtherFish(0, Math.floor(Math.random() * 565), 40, randomIntFromInterval(-1, 1), 0, createNewImage(15))
-    fish8a = new OtherFish(0, Math.floor(Math.random() * 565), 40, randomIntFromInterval(-1, 1), 0, createNewImage(16))
+    fish1 = new OtherFish(0, Math.floor(Math.random() * canvas.height-100), canvas.width/30, randomIntFromInterval(-1, 1), 0, createNewImage(1))
+    fish2 = new OtherFish(0, Math.floor(Math.random() * canvas.height-100), canvas.width/20, randomIntFromInterval(-1, 1), 0, createNewImage(2))
+    fish3 = new OtherFish(0, Math.floor(Math.random() * canvas.height-100), canvas.width/15, randomIntFromInterval(-1, 1), 0, createNewImage(3))
+    fish4 = new OtherFish(0, Math.floor(Math.random() * canvas.height-100), canvas.width/11.5, randomIntFromInterval(-1, 1), 0, createNewImage(4))
+    fish5 = new OtherFish(0, Math.floor(Math.random() * canvas.height-100), canvas.width/9.5, randomIntFromInterval(-1, 1), 0, createNewImage(5))
+    fish6 = new OtherFish(0, Math.floor(Math.random() * canvas.height-100), canvas.width/8.2, randomIntFromInterval(-1, 1), 0, createNewImage(6))
+    fish7 = new OtherFish(0, Math.floor(Math.random() * canvas.height-100), canvas.width/6.7, randomIntFromInterval(-1, 1), 0, createNewImage(7))
+    fish8 = new OtherFish(0, Math.floor(Math.random() * canvas.height-100), canvas.width/3.8, randomIntFromInterval(-1, 1), 0, createNewImage(8))
+    fish1a = new OtherFish(0, Math.floor(Math.random() * canvas.height-100), canvas.width/30, randomIntFromInterval(-1, 1), 0, createNewImage(9))
+    fish2a = new OtherFish(0, Math.floor(Math.random() * canvas.height-100), canvas.width/20, randomIntFromInterval(-1, 1), 0, createNewImage(10))
+    fish3a = new OtherFish(0, Math.floor(Math.random() * canvas.height-100), canvas.width/15, randomIntFromInterval(-1, 1), 0, createNewImage(11))
+    fish4a = new OtherFish(0, Math.floor(Math.random() * canvas.height-100), canvas.width/11.5, randomIntFromInterval(-1, 1), 0, createNewImage(12))
+    fish5a = new OtherFish(0, Math.floor(Math.random() * canvas.height-100), canvas.width/9.5, randomIntFromInterval(-1, 1), 0, createNewImage(13))
+    fish6a = new OtherFish(0, Math.floor(Math.random() * canvas.height-100), canvas.width/8.2, randomIntFromInterval(-1, 1), 0, createNewImage(14))
+    fish7a = new OtherFish(0, Math.floor(Math.random() * canvas.height-100), canvas.width/6.7, randomIntFromInterval(-1, 1), 0, createNewImage(15))
+    fish8a = new OtherFish(0, Math.floor(Math.random() * canvas.height-100), canvas.width/3.8, randomIntFromInterval(-1, 1), 0, createNewImage(16))
 
     fishArrayTemplate.push(fish1, fish2, fish3, fish4, fish5, fish6, fish7, fish8)
 
@@ -278,7 +289,7 @@ $(document).ready(function () {
     resultFromRandomFunction = randomIntFromInterval(-1, 1)
     if(resultFromRandomFunction === -1){
       //console.log('left')
-      fishArray.push(new OtherFish(-1, Math.floor(Math.random() * 450), Math.floor(Math.random() * 100), resultFromRandomFunction * (Math.floor(Math.random() * 4) + 1), 0, createNewImageMirror(Math.floor(Math.random() * 7) + 1)))
+      fishArray.push(new OtherFish(-1, Math.floor(Math.random() * 450), Math.floor(Math.random() * canvas.width/11), resultFromRandomFunction * (Math.floor(Math.random() * 4) + 1), 0, createNewImageMirror(Math.floor(Math.random() * 7) + 1)))
     } else if(resultFromRandomFunction === 1 ) {
       //console.log('right')
       fishArray.push(new OtherFish(-1, Math.floor(Math.random() * 450), Math.floor(Math.random() * 100), resultFromRandomFunction * (Math.floor(Math.random() * 4) + 1), 0, createNewImage(Math.floor(Math.random() * 7) + 1)))
@@ -318,7 +329,7 @@ $(document).ready(function () {
         //  console.log('fish obstacle width is ' + eachFishInArray.width)
         index = fishArray.indexOf(eachFishInArray)
         fishWidth = fishArray[index].width
-        console.log('my fish width is ' + myFish.width + ' ' + 'fish obstacle width is ' + fishWidth)
+        // console.log('my fish width is ' + myFish.width + ' ' + 'fish obstacle width is ' + fishWidth)
 
       }
     })
@@ -401,6 +412,12 @@ $(document).ready(function () {
     myFish.width += 5
     myFish.width += 5
     winSound.play()
+    fishArray.forEach(function (eachFish) {
+      eachFish.stop()
+    })
+
+    clearInterval(setIntervalReturn)
+    clearInterval(myGameArea.interval)
     swal(
       {
         title: 'YOU WON!',
@@ -423,8 +440,8 @@ $(document).ready(function () {
     })
 
     var indexAndWidthOfOverlap = anyOverlap()
-    console.log('obstacle at end, width:', indexAndWidthOfOverlap.fishWidth);
-    console.log('my fish at end', myFish.width);
+    // console.log('obstacle at end, width:', indexAndWidthOfOverlap.fishWidth);
+    // console.log('my fish at end', myFish.width);
 
     if (indexAndWidthOfOverlap.fishWidth <= myFish.width) {
       biteSound.play()
@@ -459,7 +476,7 @@ $(document).ready(function () {
     myGameArea.start()
     populateFishTank()
     myFish = new MyFish(createNewImage(1), myFishSize, myFishSize)
-    setIntervalReturn = setInterval(populateFishTank, 2000)
+    setIntervalReturn = setInterval(populateFishTank, 500)
   }
 
 
@@ -492,9 +509,11 @@ $(document).ready(function () {
   var canvasElement = document.querySelector('canvas')
   var canvasPos = getPosition(canvasElement)
 
+
   function setMousePosition (e) {
     mouseX = e.clientX - canvasPos.x
     mouseY = e.clientY - canvasPos.y
+    console.log(mouseX, mouseY)
 
     return {
       mouseX: mouseX,

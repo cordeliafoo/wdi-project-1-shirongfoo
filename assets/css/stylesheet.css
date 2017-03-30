@@ -1,17 +1,3 @@
-/*body {
-  margin-top: -20px;
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  justify-content: center;
-  font-family: 'Space Mono', monospace;
-  font-family: 'Nova Oval', cursive;
-  font-family: 'Baloo Bhaina', cursive;
-  font-size: 1.2em;
-  padding-bottom: 0;
-
-}*/
-
 #titleAndScoreDiv{
   width:  90%;
   height: 100px;
@@ -21,14 +7,16 @@
   justify-content: center;
   font-family: 'Baloo Bhaina', cursive;
   margin-bottom: -25px;
-  /*position: relative;*/
+  font-size: 1.8em;
 }
+
 h1{
-    flex: 12 0 0;
+    flex: 16 0 0;
     text-align: center;
 }
 
 p{
+  font-size: 0.5em;
   flex: 1 0 0;
 }
 
@@ -43,24 +31,32 @@ p{
 audio{
   display: none;
 }
-/*
-h1, div {
-  align-self: center;
-}*/
 
-/*p {
-  position: absolute;
-  right: -120px;
-  bottom: 20px;
 
+
+@media (max-width: 800px){
+  #titleAndScoreDiv{
+   font-size: 1em;
+   width: 600px;
+  }
+
+  h1{
+      flex: 10 0 0;
+      text-align: center;
+  }
+
+  p{
+    flex: 1 0 0;
+    font-size: 0.8em;
+  }
+
+  #canvas{
+    width: 100%;
+    height: 565px;
+  }
+
+#canvasDiv{
+  width: 1000px;
 }
 
-#mainDiv{
-  margin-top: -10px;
-}
-
-
-
-canvas{
-  margin-top: -20px;
 }

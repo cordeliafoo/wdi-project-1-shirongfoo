@@ -275,11 +275,12 @@ $(document).ready(function () {
 
 
 
+    resultFromRandomFunction = randomIntFromInterval(-1, 1)
     if(resultFromRandomFunction === -1){
-      console.log('left')
+      //console.log('left')
       fishArray.push(new OtherFish(-1, Math.floor(Math.random() * 450), Math.floor(Math.random() * 100), resultFromRandomFunction * (Math.floor(Math.random() * 4) + 1), 0, createNewImageMirror(Math.floor(Math.random() * 7) + 1)))
     } else if(resultFromRandomFunction === 1 ) {
-      console.log('right')
+      //console.log('right')
       fishArray.push(new OtherFish(-1, Math.floor(Math.random() * 450), Math.floor(Math.random() * 100), resultFromRandomFunction * (Math.floor(Math.random() * 4) + 1), 0, createNewImage(Math.floor(Math.random() * 7) + 1)))
     }
   }
@@ -295,14 +296,14 @@ $(document).ready(function () {
       myFishTop = mouseY - myFish.width/2
       myFishBottom = myFishTop + myFish.width
 
-      eachFishInArrayWidth = eachFishInArray.width / 10
+      eachFishInArrayWidth1 = eachFishInArray.width / 10
 
 
-      eachFishInArrayLeft = eachFishInArray.x + eachFishInArrayWidth * 3
-      eachFishInArrayRight = eachFishInArray.x + eachFishInArray.width - eachFishInArrayWidth * 3
+      eachFishInArrayLeft = eachFishInArray.x + eachFishInArrayWidth1 * 3
+      eachFishInArrayRight = eachFishInArray.x + eachFishInArray.width - eachFishInArrayWidth1 * 3
 
-      eachFishInArrayTop = eachFishInArray.y + eachFishInArrayWidth * 3
-      eachFishInArrayBottom = eachFishInArray.y + eachFishInArray.width - eachFishInArrayWidth * 3
+      eachFishInArrayTop = eachFishInArray.y + eachFishInArrayWidth1 * 3
+      eachFishInArrayBottom = eachFishInArray.y + eachFishInArray.width - eachFishInArrayWidth1 * 3
 
 
 
@@ -314,7 +315,8 @@ $(document).ready(function () {
        // if all are false, there is overlap
 
       if (overlap) {
-         console.log(eachFishInArrayLeft, eachFishInArrayRight, eachFishInArrayTop, eachFishInArrayBottom)
+         console.log('fish obstacle width is ' + eachFishInArray.width)
+         console.log('my fish width is ' + myFish.width)
         index = fishArray.indexOf(eachFishInArray)
         fishWidth = fishArray[index].width
       }
@@ -418,6 +420,7 @@ $(document).ready(function () {
       eachFish.move()
       eachFish.wrap()
     })
+
     var indexAndWidthOfOverlap = anyOverlap()
 
     if (indexAndWidthOfOverlap.index === 0 || indexAndWidthOfOverlap.index && indexAndWidthOfOverlap.fishWidth <= myFish.width) {
@@ -426,8 +429,6 @@ $(document).ready(function () {
         biteSound.pause()
         biteSound.currentTime = 0
       }, 300)
-      // biteSound.pause()
-      // biteSound.currentTime = 0
       spliceAddIncreaseScore(indexAndWidthOfOverlap.index)
       changeFishSize()
     } else if (indexAndWidthOfOverlap.index === 0 || indexAndWidthOfOverlap.index && indexAndWidthOfOverlap.fishWidth >= myFish.width) {
@@ -435,7 +436,6 @@ $(document).ready(function () {
     }
     score.text('Score: ' + counter)
 
-     resultFromRandomFunction = randomIntFromInterval(-1, 1)
   }
 
   // start game function

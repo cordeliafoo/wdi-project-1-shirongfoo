@@ -434,7 +434,7 @@ $(document).ready(function () {
       }, 300)
       spliceAddIncreaseScore(indexAndWidthOfOverlap.index)
       changeFishSize()
-    } else if (indexAndWidthOfOverlap.index === 0 || indexAndWidthOfOverlap.index && indexAndWidthOfOverlap.fishWidth >= myFish.width) {
+    } else if (indexAndWidthOfOverlap.fishWidth >= myFish.width) {
       gameOver()
     }
     score.text('Score: ' + counter)

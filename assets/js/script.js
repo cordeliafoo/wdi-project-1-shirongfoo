@@ -1,5 +1,7 @@
 
 $(document).ready(function () {
+
+//declare game variables
   var myFish
   var mouseX = 0
   var mouseY = 0
@@ -30,18 +32,15 @@ $(document).ready(function () {
   var fish8
   var fish8a
   var resultFromRandomFunction
-  // var fishSizeArray = [5, 10, 15, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130,140, 150, 160,170, 180, 200, 210, 220]
 
-  //sound variables
+  //declare sound variables
   var biteSound = document.querySelector('.biteSound')
   var fishtankBubbles = document.querySelector('.fishtankBubbles')
   fishtankBubbles.volume = 0.1
   var loseSound = document.querySelector('.loseSound')
   var winSound = document.querySelector('.winSound')
 
-
-
-// function to include image source
+// functions to create and load images
   function createNewImage (number) {
     switch (number) {
       case 1:
@@ -183,6 +182,8 @@ $(document).ready(function () {
             return
           }
   }
+
+
 // myGameArea object
   var myGameArea = {
     // canvas: $('#canvas'),
@@ -296,7 +297,6 @@ $(document).ready(function () {
     }
   }
 
-
 // check if myfish overlaps with any fish in the fishArray
   function anyOverlap () {
     var index
@@ -381,7 +381,7 @@ $(document).ready(function () {
     }
   }
 
-// stop fish, display alert box, and reload game
+// stop fish, display alert box, and reload page
   function gameOver () {
     myFish.width = 0
     myFish.height = 0
@@ -407,6 +407,7 @@ $(document).ready(function () {
   )
  }
 
+//stop fish, display alert box, and reload page
   function youWon () {
     // fishArray = []
     myFish.width += 5
@@ -538,6 +539,7 @@ $(document).ready(function () {
     }
   }
 
+
   function randomIntFromInterval (min, max) {
     // console.log(Math.floor(Math.random() * (max - min + 1) + min))
     var randomInt = Math.floor(Math.random() * (max - min + 1) + min)
@@ -550,11 +552,26 @@ $(document).ready(function () {
     }
   }
 
-  // Returns a random integer between min (included) and max (included)
 
+  // Returns a random integer between min (included) and max (included)
   function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
+
+
+
+///////////////////////////////Unused functions for future development///////////////
+$(window).on("resize", function(event){
+  function getXY(canvas, event){
+
+      var rect = canvas.getBoundingClientRect(), /// get absolute rect. of canvas
+          x = event.clientX - rect.left,         /// adjust for x
+          y = event.clientY - rect.top;          /// adjust for y
+
+        mouseX = x
+        mouseY = y
+  }
+})
 
   function checkKeyPress (e) {
     switch (e.keyCode) {

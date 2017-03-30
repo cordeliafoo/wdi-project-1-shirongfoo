@@ -6,10 +6,13 @@
 Stop being a small fish in a big pond!  Move around the screen to eat smaller fish and watch yourself grow.  Beware of the bigger fish.  They'll gobble you up.
 
 ## Gameplay
-
+Use the mouse to move your fish around the screen.
+Hover over other small fish to eat them.
+Collect enough points to size up!
 
 ## Development
 * HTML 5 Canvas, programmed using Javascript
+* Some Responsive Web Design so the canvas re-centers and font adjusts accordingly when browser size changes
 * index.html/style.css/script.js
 * [View Code Workflow here]
 
@@ -22,5 +25,6 @@ Stop being a small fish in a big pond!  Move around the screen to eat smaller fi
 * [Background Images](https://dribbble.com/tags/sidescroller_background)
 
 ## What I Would Have Done Differently
-* Increase game speed as score increased.
-* 
+* Increase game speed as score increases
+* Fix the mouse position
+* Use key presses instead of mouse to control my fish so multiple players can play simultaneously

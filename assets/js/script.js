@@ -315,10 +315,11 @@ $(document).ready(function () {
        // if all are false, there is overlap
 
       if (overlap) {
-         console.log('fish obstacle width is ' + eachFishInArray.width)
-         console.log('my fish width is ' + myFish.width)
+        //  console.log('fish obstacle width is ' + eachFishInArray.width)
         index = fishArray.indexOf(eachFishInArray)
         fishWidth = fishArray[index].width
+        console.log('my fish width is ' + myFish.width + ' ' + 'fish obstacle width is ' + fishWidth)
+
       }
     })
     return {
@@ -422,8 +423,10 @@ $(document).ready(function () {
     })
 
     var indexAndWidthOfOverlap = anyOverlap()
+    console.log('obstacle at end, width:', indexAndWidthOfOverlap.fishWidth);
+    console.log('my fish at end', myFish.width);
 
-    if (indexAndWidthOfOverlap.index === 0 || indexAndWidthOfOverlap.index && indexAndWidthOfOverlap.fishWidth <= myFish.width) {
+    if (indexAndWidthOfOverlap.fishWidth <= myFish.width) {
       biteSound.play()
       setTimeout(function(){
         biteSound.pause()

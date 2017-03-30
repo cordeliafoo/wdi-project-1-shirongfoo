@@ -182,8 +182,6 @@ $(document).ready(function () {
             return
           }
   }
-
-
 // myGameArea object
   var myGameArea = {
     // canvas: $('#canvas'),

@@ -26,7 +26,11 @@ Collect enough points to size up!
 * [Media Query for Responsive Web Design](http://www.w3schools.com/css/css_rwd_mediaqueries.asp)
 * [Sweet Alert](http://t4t5.github.io/sweetalert/)
 
+
 ## What I Would Have Done Differently
 * Increase game speed as score increases
 * Fix the mouse position in canvas when browser resizes
 * Use key presses instead of mouse to control my fish so multiple players can play simultaneously
+
+## Acknowledgements
+* Many thanks to GA instructors/TAs - Prima, Sharona, Yi Sheng - and my classmates from WDI-SG/9 for all their help!

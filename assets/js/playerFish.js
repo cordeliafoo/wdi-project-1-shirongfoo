@@ -104,7 +104,6 @@ PlayerFish.prototype.faceOrientation = function () {
 PlayerFish.prototype.increaseSize = function () {
   switch (this.score) {
     case 10:
-      console.log('changing size to 40');
       this.width = 50
       this.height = 50
       break

@@ -1,6 +1,6 @@
 // # fishObstacle Constructor and Prototype
 function FishObstacle (posX, posY, width, height, imageFolder, imageFormat, velocity, fishObstacleRemovalDuration) {
-  this.posX = 0
+  this.posX = Math.floor( Math.random() * ( 1 + (-50) - (-100) ) ) + (-100)
   this.posY = this.randomY()
   this.width = width
   this.height = height
@@ -81,7 +81,6 @@ FishObstacle.prototype.collisionDetection = function (playerFishArray) {
       this.collided = true
       this.alive = false
       playerFish.score += 1
-      console.log(playerFish.score);
     } else if (
       this.posX < playerFish.posX &&
       playerFish.posX + playerFish.width < this.posX + this.width &&

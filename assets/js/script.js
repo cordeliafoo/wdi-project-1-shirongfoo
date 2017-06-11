@@ -3,7 +3,7 @@ $(document).ready(function () {
   var canvas = $('#canvas')[0]
   var context = canvas.getContext('2d')
   canvas.width = window.innerWidth * 0.95
-  canvas.height = window.innerHeight * 0.95
+  canvas.height = window.innerHeight * 0.85
   var winner = []
   var loser = []
 
@@ -29,8 +29,8 @@ $(document).ready(function () {
 
   // # Fish Obstacle Variables
   var fishObstacleArray = []
-  var fishObstacleSpawnDuration = 20
-  var fishObstacleRemovalDuration = 5
+  // var fishObstacleSpawnDuration = 20
+  // var fishObstacleRemovalDuration = 5
 
   // # Player Selection variables
   var playerOneControl = 1
@@ -189,32 +189,55 @@ $(document).ready(function () {
   setInterval(spawnFishObstacle, 5000)
   setInterval(removeFishObstacle, 1000)
 
-// # Main GameRunning Function
-  function runCanvas () {
-    display(myGameArea)
+// # Pre-game swal
+  swal(
+    {
+      // title: 'how to play?',
+      // text: 'Player 1 uses W-A-S-D.  Player 2 uses Up-Down-Left-Right arrows. Eat smaller fish, and avoid bigger ones.',
+      // confirmButtonText: 'let the battle begin!'
+      title: 'how to play fat fishy?',
+      // type: 'info',
+      html: true,
+      text:
+            'Player 1 uses <b>W-A-S-D</b>, ' +
+            '</br> ' +
+            'Player 2 uses <b>Up Down Left Right</b>, ' +
+            '</br> ' +
+            '</br> ' +
+            'Move around and eat smaller fish to grow. ' +
+            '</br> ' +
+            'Take care to avoid the bigger fishys!',
+      confirmButtonText: 'let the battle begin!'
 
-    playerFishOne.control()
-    playerFishTwo.control()
-    playerFishOne.increaseSize()
-    playerFishTwo.increaseSize()
-    drawPlayerFish()
+    }, // # Main GameRunning Function
+    function runCanvas () {
+      display(myGameArea)
 
-    drawFishObstacle()
-    moveFishObstacle()
-    checkForCollision()
-    checkPlayerOrObstacleDies()
-    displayPlayerScore()
+      playerFishOne.control()
+      playerFishTwo.control()
+      playerFishOne.increaseSize()
+      playerFishTwo.increaseSize()
+      drawPlayerFish()
 
-    pauseToggle()
-    checkWhichPlayerDied()
+      drawFishObstacle()
+      moveFishObstacle()
+      checkForCollision()
+      checkPlayerOrObstacleDies()
+      displayPlayerScore()
 
-    if (pause) {
-      requestAnimationFrame(pauseCanvas)
-    } else {
-      requestAnimationFrame(runCanvas)
+      pauseToggle()
+      checkWhichPlayerDied()
+
+      if (pause) {
+        requestAnimationFrame(pauseCanvas)
+      } else {
+        requestAnimationFrame(runCanvas)
+      }
+
+      // requestAnimationFrame(runCanvas)
     }
 
-    // requestAnimationFrame(runCanvas)
-  }
+)
+
   requestAnimationFrame(runCanvas)
 })// end of document.ready

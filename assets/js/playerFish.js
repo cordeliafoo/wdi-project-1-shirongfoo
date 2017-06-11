@@ -103,7 +103,7 @@ PlayerFish.prototype.faceOrientation = function () {
 
 PlayerFish.prototype.increaseSize = function () {
   switch (this.score) {
-    case 10:
+    case 5:
       this.width = 50
       this.height = 50
       break

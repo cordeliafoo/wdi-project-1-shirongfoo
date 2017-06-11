@@ -5,8 +5,4 @@
      "$", "alert"
    ]
  },
-
-  "scripts": {
-    "start": "node script.js"
-}
 }
